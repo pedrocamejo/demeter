@@ -1,0 +1,143 @@
+<?page title="Demeter Gestion Servicios"?>
+<?link rel="shortcut icon" type="image/x-icon" href="iconos/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/favicon.ico"?>
+<zk>
+<window apply="cpc.demeter.Index" height="100%" width="100%" id="ventana">
+<style>
+.btnEdicion.z-button .z-button-tl{
+	background-image : none; 
+	background-position : top left;
+}
+.btnEdicion.z-button .z-button-tm{
+	background-image : none; 
+	background-position : top center;
+}
+.btnEdicion.z-button .z-button-tr{
+	background-image : none; 
+	background-position : top right;
+}
+.btnEdicion.z-button .z-button-cl{
+	background-image : none; 
+	background-position : center left;
+}
+.btnEdicion.z-button .z-button-cm{
+	background-image : none; 
+	background-position : center center;
+}
+.btnEdicion.z-button .z-button-cr{
+	background-image : none; 
+	background-position : center right;
+}
+.btnEdicion.z-button .z-button-bl{
+	background-image : none; 
+	background-position : bottom left;
+}
+.btnEdicion.z-button .z-button-bm{
+	background-image : none; 
+	background-position : bottom center;
+}
+.btnEdicion.z-button .z-button-br{
+	background-image : none; 
+	background-position : bottom right;
+}
+.z-west-header {font-size: 14px; }
+.menu_principal
+{
+	font-size: 14px;
+}
+.tabla_catalago tbody tr {
+    height: 40px;
+    width: 100%;
+}
+
+.tabla_catalago tbody tr div.z-list-cell-cnt {
+    padding: 10px 11px;
+}
+
+.z-tab-accordion-text {
+    font-size: 14px;
+} 
+
+.menu_principal div.z-list-cell-cnt {
+    padding: 4px 0;
+}
+
+.z-loading { top: 50% !important; left: 45% !important; align:
+		center; vertical-align: middle;
+}
+
+.all_right {
+    position: absolute;
+    right: 20px;
+}
+
+.seleccionar_boton{ 
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+}
+
+.panel_tabla{
+  width: 100%;
+}
+
+.label{
+	font-size: 11px;
+	font-weight:bold;
+}
+.colorblanco{
+	color:white;	
+	font-family: arial;
+	font-weight: bold;
+}
+
+.informador table {
+	margin-right: 15px;
+}
+</style> 
+		<borderlayout width="100%">
+			<north height="80px" style="background:url(imagenes/fondoBanner.png)">
+					<hbox id="name" width="100%"   height="100%" zclass="hbox_informacion"  >
+						<div width="100%">
+							<button width="100%" height="50px"  image="imagenes/membrete.png" sclass="btnEdicion"  />
+						</div>
+						<div width="100%" align="right" zclass="informador">
+							<vbox>
+								<div align="right">
+  									<label value="Version 2.17" zclass="label"/>
+								</div>
+								<div align="right">
+									<label id="fechaControl"  zclass="label"/>
+								</div>
+								<div align="right">
+									<label id="lblInfoUsuario" width="100%"  zclass="label colorblanco"></label>
+									<button id="imgDocumentacion" image="imagenes/help.png" sclass="btnEdicion" />
+									<button id="imgCambioClave" image="imagenes/resetPassword.png"  sclass="btnEdicion" />
+									<button id="imgReiniciarSesion" image="imagenes/stock_exit.png" sclass="btnEdicion"   />
+								</div>
+							</vbox>
+						</div>
+					</hbox>
+ 			</north>
+			<west title="Menu" size="15%" flex="true" maxsize="600" splittable="true" collapsible="true">
+				<vbox id="menu" />
+			</west>
+			<center autoscroll="true">
+				<div width="100%">
+					<vbox id="contenedor" width="100%"> </vbox>
+				</div>
+			</center> 
+			<south>
+				<div width="100%">
+					<label>CVA Compañia de Mecanizado Agricola y Transporte Pedro Camejo S.A. </label>
+				</div>
+			</south>
+		</borderlayout>
+	</window>
+</zk>
+

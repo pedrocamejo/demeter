@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InventarioActivos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="rutaImagenEncabezado" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="nombreReporte" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="dia" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="mes" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="fecha" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[almacen.nombre]]></fieldDescription>
+	</field>
+	<field name="nombreTipoAlmacen" class="java.lang.String">
+		<fieldDescription><![CDATA[almacen.nombreTipoAlmacen]]></fieldDescription>
+	</field>
+	<field name="responsable" class="java.lang.String">
+		<fieldDescription><![CDATA[almacen.responsable]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[almacen.unidadFuncional.descripcion]]></fieldDescription>
+	</field>
+	<field name="serial" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.serial]]></fieldDescription>
+	</field>
+	<field name="nombre_1" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.nombre]]></fieldDescription>
+	</field>
+	<field name="descripcionMarca" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.descripcionMarca]]></fieldDescription>
+	</field>
+	<field name="descripcionModelo" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.descripcionModelo]]></fieldDescription>
+	</field>
+	<field name="chapa" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.chapa]]></fieldDescription>
+	</field>
+	<field name="descripcionMotivo" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.activoAlmacen.descripcionMotivo]]></fieldDescription>
+	</field>
+	<field name="observacion" class="java.lang.String">
+		<fieldDescription><![CDATA[activo.activoAlmacen.observacion]]></fieldDescription>
+	</field>
+	<field name="nombre_2" class="java.lang.String">
+		<fieldDescription><![CDATA[almacen.unidadAdministrativa.nombre]]></fieldDescription>
+	</field>
+	<field name="ubicacionGeografica" class="cpc.modelo.ministerio.dimension.UbicacionDireccion">
+		<fieldDescription><![CDATA[almacen.ubicacionGeografica]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[almacen.id]]></fieldDescription>
+	</field>
+	<sortField name="id"/>
+	<group name="Almacen" isReprintHeaderOnEachPage="true" minHeightToStartNewPage="20">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+		<groupHeader>
+			<band height="97" splitType="Stretch">
+				<line>
+					<reportElement key="line-1" x="2" y="96" width="777" height="1"/>
+				</line>
+				<staticText>
+					<reportElement key="staticText-5" x="3" y="79" width="87" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Serial Activo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-6" x="90" y="79" width="156" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Descripción]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-7" x="245" y="79" width="76" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Marca]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-8" x="320" y="79" width="81" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Modelo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-9" x="400" y="79" width="107" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Chapa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-10" x="603" y="79" width="176" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Observaciones]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-39" x="506" y="79" width="98" height="14"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Estado Actual]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-40" x="6" y="7" width="84" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Almacen :]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-13" positionType="FixRelativeToBottom" x="93" y="7" width="274" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-14" positionType="FixRelativeToBottom" x="93" y="26" width="352" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{responsable}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-41" x="6" y="26" width="84" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Responsable :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-42" x="377" y="7" width="84" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Ubicación :]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" positionType="FixRelativeToBottom" x="464" y="8" width="310" height="32" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Justified">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ubicacionGeografica}.getStrEstado() + ", " + $F{ubicacionGeografica}.getStrMunicipio() + ", " + $F{ubicacionGeografica}.getDescripcion()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-44" x="6" y="61" width="110" height="14"/>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Unidad Funcional :]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-16" positionType="FixRelativeToBottom" x="109" y="61" width="352" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-45" x="6" y="43" width="84" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Tipo Almacen :]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-17" positionType="FixRelativeToBottom" x="93" y="43" width="352" height="14" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Left">
+						<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombreTipoAlmacen}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="4" splitType="Stretch">
+				<line>
+					<reportElement key="line-2" x="2" y="2" width="777" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Prevent"/>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="198" y="64" width="386" height="36"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreReporte}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-10" positionType="FixRelativeToBottom" x="46" y="104" width="476" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-36" x="6" y="104" width="39" height="14"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Sede:]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement key="image-1" x="2" y="0" width="777" height="60"/>
+				<imageExpression><![CDATA[$P{rutaImagenEncabezado}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-43" x="614" y="88" width="42" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="664" y="88" width="100" height="18"/>
+				<textElement>
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="57" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+			<staticText>
+				<reportElement key="staticText-14" positionType="FixRelativeToBottom" x="2" y="5" width="20" height="16">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Hoy]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-9" positionType="Float" x="24" y="5" width="21" height="16">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-15" positionType="FixRelativeToBottom" x="45" y="5" width="14" height="16">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" positionType="FixRelativeToBottom" x="62" y="5" width="54" height="16">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-16" positionType="FixRelativeToBottom" x="116" y="5" width="658" height="16">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[, Yo __________________________________________ C.I_______________________________ en mi condición de funcionario de la EmpresaSocialista de Mecanizado y]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-17" positionType="FixRelativeToBottom" x="2" y="21" width="772" height="17">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Transporte agricola "Pedro Camejo" S.A adscrito al Ministerio del Poder Popular para la Agricultura y Tierras, mediante la presente doy fe que la maquinaria, equipos e implementos ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-37" positionType="FixRelativeToBottom" x="2" y="39" width="772" height="17" isPrintInFirstWholeBand="true">
+					<printWhenExpression><![CDATA[new Boolean(new Integer(1).equals($V{PAGE_NUMBER}))]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[agricolas descritas en este documento, están almacendas en ésta empresa.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="2" y="3" width="88" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-1" x="90" y="3" width="155" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-2" x="244" y="3" width="77" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionMarca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-3" x="320" y="3" width="81" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionModelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-4" x="400" y="3" width="107" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{chapa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-7" x="603" y="3" width="176" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-12" x="506" y="3" width="98" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionMotivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-21" mode="Opaque" x="9" y="3" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Elaborado por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-22" mode="Opaque" x="9" y="59" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Responsable Inventario]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-1" mode="Transparent" x="9" y="3" width="199" height="70"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-23" positionType="FixRelativeToBottom" x="14" y="23" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-24" positionType="FixRelativeToBottom" x="14" y="33" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[C.I:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-25" positionType="FixRelativeToBottom" x="14" y="44" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-26" mode="Opaque" x="293" y="3" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Administración regional ESPC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" mode="Opaque" x="293" y="59" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Administrador]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-2" mode="Transparent" x="293" y="3" width="199" height="70"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-28" positionType="FixRelativeToBottom" x="298" y="23" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-29" positionType="FixRelativeToBottom" x="298" y="33" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[C.I:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-30" positionType="FixRelativeToBottom" x="298" y="44" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-31" mode="Opaque" x="561" y="3" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Coordinación regional ESPC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-32" positionType="FixRelativeToBottom" mode="Opaque" x="561" y="59" width="199" height="14" backcolor="#C9C9C9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Coordinador]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement key="rectangle-3" mode="Transparent" x="561" y="3" width="199" height="70"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-33" positionType="FixRelativeToBottom" x="566" y="23" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-34" positionType="FixRelativeToBottom" x="566" y="33" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[C.I:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-35" positionType="FixRelativeToBottom" x="566" y="44" width="60" height="7"/>
+				<textElement>
+					<font size="5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

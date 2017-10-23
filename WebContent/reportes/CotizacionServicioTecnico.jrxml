@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudMecanizado" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="195"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="fecha" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cantidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidad]]></fieldDescription>
+	</field>
+	<field name="cantidadReal" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidadReal]]></fieldDescription>
+	</field>
+	<field name="contrato" class="cpc.modelo.demeter.administrativo.Cotizacion">
+		<fieldDescription><![CDATA[contrato]]></fieldDescription>
+	</field>
+	<field name="estadoString" class="java.lang.String">
+		<fieldDescription><![CDATA[estadoString]]></fieldDescription>
+	</field>
+	<field name="fechaString" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaString]]></fieldDescription>
+	</field>
+	<field name="precioUnidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[precioUnidad]]></fieldDescription>
+	</field>
+	<field name="prestado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[prestado]]></fieldDescription>
+	</field>
+	<field name="producto" class="cpc.modelo.demeter.interfaz.IProducto">
+		<fieldDescription><![CDATA[producto]]></fieldDescription>
+	</field>
+	<field name="subtotal" class="java.lang.Double">
+		<fieldDescription><![CDATA[subtotal]]></fieldDescription>
+	</field>
+	<field name="unidadCobro" class="cpc.modelo.demeter.basico.UnidadMedida">
+		<fieldDescription><![CDATA[unidadCobro]]></fieldDescription>
+	</field>
+	<field name="impuesto" class="cpc.modelo.demeter.administrativo.Impuesto">
+		<fieldDescription><![CDATA[impuesto]]></fieldDescription>
+	</field>
+	<variable name="impuesto" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{impuesto}.getPorcentaje()==new Double(0.0)? new Double(0.0) : $F{subtotal})]]></variableExpression>
+	</variable>
+	<variable name="exento" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{impuesto}.getPorcentaje()==new Double(0.0) ? $F{subtotal} :new Double(0.0))]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="365" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="90" y="109" width="160" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contrato}.getStrNroDocumento()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="27" y="59" width="518" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cotizacion de Articulos"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement key="image-1" x="11" y="5" width="550" height="50"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-5" x="9" y="109" width="81" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nro. Control:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-3" x="338" y="109" width="217" height="18"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA["del "+$F{contrato}.getFechaDesdeString() +" hasta "+$F{contrato}.getFechaHastaString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-6" x="250" y="109" width="88" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Disponibilidad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-12" x="9" y="127" width="81" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Estado:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-9" x="90" y="127" width="160" height="18"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getEstado()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-13" mode="Opaque" x="10" y="164" width="550" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DATOS DEL PRODUCTOR]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-10" x="61" y="184" width="198" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contrato}.getPagador().getIdentidadLegal()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-14" x="9" y="184" width="51" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[C.I./RIF:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-12" x="61" y="206" width="499" height="28"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getPagador().getNombres()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-16" x="9" y="205" width="51" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-20" x="11" y="234" width="68" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Direccion:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-16" x="79" y="234" width="483" height="34"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getPagador().getDireccion()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-21" mode="Opaque" x="11" y="268" width="550" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Codiciones Generales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-25" mode="Opaque" x="10" y="89" width="550" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DATOS GENERALES]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="338" y="127" width="217" height="18"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getSalidaExternaArticulo().getStrNroDocumento()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-6" x="250" y="127" width="88" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Salida Art.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-10" x="312" y="184" width="243" height="18"/>
+				<textElement textAlignment="Left">
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contrato}.getPagador().getStrTelefonos()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-14" x="259" y="184" width="51" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[TLF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-14" x="9" y="283" width="553" height="82"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" markup="html">
+					<font size="7" isBold="false" isItalic="false" pdfFontName="Helvetica-Bold"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[	El tiempo de entregas de maquinarias es de 15 días hábiles una vez suscrito el contrato de suministro de maquinaria agrícola. El servicio de transporte es opcional y a solicitud del contratante.  CVA Cía De Mecanizado Agrícola y Transporte Pedro Camejo, garantizara al contratante el servicio de puesta en marcha de Maquinarias o Equipos. Favor indicar la fecha de entrega para la planificación de la logística correspondiente.
+Depositar o Transferir a nombre de  CVA EMPRESA DE MECANIZADO AGRÍCOLA Y TRANSPORTE  PEDRO CAMEJO SA  RIF. G-20007910-0   en las siguientes cuentas:  <br>
+	Banco de Venezuela Cuenta Corriente : <b>0102-0552-28-0000025603</b> del banco de Venezuela. <br>
+	Banco de Venezuela Cuenta Corriente : <b>0102-0552-20-0000025616 , en caso de  Rollos de Pastura  para Mantenimiento</b>. <br>
+ DEPOSITOS EN EFECTIVO O   TRANSFERENCIA  BANCARIA A LA CUENTAS ANTES MENCIONADA. <b> NO DEPÓSITOS EN CHEQUES, Y POR NINGÚN MOTIVO PAGO EN EFECTIVO.</b>.
+
+
+ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-5" x="11" y="145" width="109" height="18"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Fecha De Emision:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-3" x="120" y="146" width="217" height="18"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getFechaString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" mode="Opaque" x="10" y="6" width="230" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Servicio / Artículo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" mode="Opaque" x="239" y="6" width="81" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-1" x="10" y="20" width="549" height="1"/>
+			</line>
+			<line>
+				<reportElement key="line-2" x="10" y="5" width="549" height="1"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-4" mode="Opaque" x="368" y="6" width="76" height="14" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Precio U.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" mode="Opaque" x="444" y="6" width="102" height="14" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-4" mode="Opaque" x="320" y="6" width="48" height="14" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[% Imp.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-20" x="10" y="1" width="230" height="30"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{producto}.getDescripcion()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-20" x="240" y="1" width="80" height="30"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-20" x="368" y="1" width="76" height="30"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precioUnidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField-20" x="444" y="1" width="102" height="30"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-20" x="320" y="1" width="48" height="30"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{impuesto}.getPorcentaje()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="184" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-21" x="10" y="83" width="301" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Impreso por : "+$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-23" mode="Transparent" x="409" y="83" width="100" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-24" x="510" y="83" width="50" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement key="rectangle-1" x="158" y="93" width="81" height="73"/>
+			</rectangle>
+			<line>
+				<reportElement key="line-3" x="313" y="137" width="143" height="2"/>
+			</line>
+			<line>
+				<reportElement key="line-4" x="313" y="122" width="143" height="2"/>
+			</line>
+			<line>
+				<reportElement key="line-5" x="313" y="150" width="143" height="2"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-26" x="239" y="108" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Responsable:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" x="239" y="123" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Cargo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-28" x="239" y="138" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-29" x="158" y="166" width="80" height="15"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sello]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-15" x="393" y="31" width="67" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Subtotal:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="467" y="3" width="89" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{exento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-7" x="24" y="45" width="437" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Impuesto"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-17" x="259" y="3" width="202" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Total Exento y/o Exonerado: ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="467" y="17" width="89" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{impuesto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="467" y="45" width="89" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getTotal()-$F{contrato}.getMonto()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-14" x="393" y="59" width="67" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="467" y="59" width="89" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getTotal()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="467" y="31" width="89" height="14"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{contrato}.getMonto()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-16" x="258" y="17" width="203" height="14"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Base Imponible:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,115 @@
+<?page title="Activacion de Garantia " contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit"?>
+<zk>
+<window id="padre" title="Activacion de Garantia " border="normal" apply="cpc.demeter.ActivacionGarantia">
+ 
+<style>
+.btnEdicion.z-button .z-button-tl{
+	background-image : none; 
+	background-position : top left;
+}
+
+.btnEdicion.z-button .z-button-tm{
+	background-image : none; 
+	background-position : top center;
+}
+
+.btnEdicion.z-button .z-button-tr{
+	background-image : none; 
+	background-position : top right;
+}
+
+.btnEdicion.z-button .z-button-cl{
+	background-image : none; 
+	background-position : center left;
+}
+
+.btnEdicion.z-button .z-button-cm{
+	background-image : none; 
+	background-position : center center;
+}
+
+.btnEdicion.z-button .z-button-cr{
+	background-image : none; 
+	background-position : center right;
+}
+
+.btnEdicion.z-button .z-button-bl{
+	background-image : none; 
+	background-position : bottom left;
+}
+
+.btnEdicion.z-button .z-button-bm{
+	background-image : none; 
+	background-position : bottom center;
+}
+
+.btnEdicion.z-button .z-button-br{
+	background-image : none; 
+	background-position : bottom right;
+}
+
+</style>
+  	<div width="100%" height="115px" style="background:url(imagenes/fondoBanner.png) repeat-x" align="center">
+			<button width="791px" height="112px" image="imagenes/membrete.png" sclass="btnEdicion" />
+			
+	</div>
+	<borderlayout height="600px">
+			 <west size="15%">
+				<div id="Menu">
+					<fisheyebar id="fsb" style="position:absolute; margin:40px 100px;"  
+        				itemWidth="80" itemHeight="80" itemMaxHeight="160" itemMaxWidth="160" orient="vertical">
+   								<fisheye label="Agregar" style="position:absolute;"  id="btnagregar" image="/imagenes/Garantia/agregar.png"></fisheye>
+								<fisheye label="Consultar" id="btnconsultar" image="/imagenes/Garantia/consultar.png"></fisheye>
+								<fisheye label="Editar" id="btneditar" image="/imagenes/Garantia/editar.png"></fisheye>
+								<fisheye label="PDF" id="btnpdf" image="/imagenes/Garantia/imprimir.png"></fisheye>
+								<fisheye label="Propietarios" id="btnusuario" image="/imagenes/Garantia/usuarios.png"></fisheye>
+								<fisheye label="?" id="btnmantenimiento" image="/imagenes/Garantia/manual.png">
+									<attribute name="onClick">
+									<![CDATA[
+									         Executions.getCurrent().sendRedirect("Ayuda.html");
+						      		//((Window)Executions.createComponents("/Ayuda.zul", null,new HashMap())).doModal();
+				   			         ]]>
+									</attribute>
+								</fisheye>
+					</fisheyebar>
+				</div>
+			</west> 
+			<north id="norte">
+		 
+			</north>
+			<center border="none" flex="true" >
+				<div id="contenedor">
+					<hbox width="100%">
+						<div align="rigth">
+							<combobox id="combBuscar">
+								<comboitem value="Maquinaria" label="Maquinaria"/>
+								<comboitem value="Propietario" label="Propietario"/>
+								<comboitem value="Estatus" label="Estatus"/>
+							</combobox>
+							<textbox id="txtBuscar"/>
+							<button id="btnbuscar" label="Buscar" tooltiptext="Buscar" image="/imagenes/lupa.png">
+							</button>
+						</div>
+						<div align="right"> 
+							<label id="lblUser" value="" style="font-size:20px;font-staly:italic;"></label>
+							<button id="cerrarSession" label="Cerrar Session" visible="false" image="/imagenes/stock_exit.png" tooltiptext="Cerrar Sessión">
+							
+							</button>
+							
+						</div>
+					</hbox>
+					<div id="divlista">
+				 
+					</div>
+					
+				</div>
+			</center>
+	</borderlayout>
+</window>
+</zk>
+
+
+
+
+

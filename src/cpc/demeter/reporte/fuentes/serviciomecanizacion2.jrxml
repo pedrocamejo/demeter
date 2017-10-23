@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="serviciomecanizacion2" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="1008" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.7974983358324876"/>
+	<property name="ireport.x" value="2586"/>
+	<property name="ireport.y" value="249"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("/home/erix/Imágenes/logopc.png")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaAño" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/erix/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaMes" class="java.lang.Integer"/>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<parameter name="sede" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cedulaRif" class="java.lang.String">
+		<fieldDescription><![CDATA[cedulaRif]]></fieldDescription>
+	</field>
+	<field name="descripcionMunicipio" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionMunicipio]]></fieldDescription>
+	</field>
+	<field name="descripcionRubro" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionRubro]]></fieldDescription>
+	</field>
+	<field name="descripcionLabor" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionLabor]]></fieldDescription>
+	</field>
+	<field name="descripcionUnidadMedida" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionUnidadMedida]]></fieldDescription>
+	</field>
+	<field name="nombresCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[nombresCliente]]></fieldDescription>
+	</field>
+	<field name="operadores" class="java.lang.String">
+		<fieldDescription><![CDATA[operadores]]></fieldDescription>
+	</field>
+	<field name="cantidalaborEjecutada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidalaborEjecutada]]></fieldDescription>
+	</field>
+	<field name="cantidaFisicoLaborada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidaFisicoLaborada]]></fieldDescription>
+	</field>
+	<field name="montoBaseFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoBaseFacturado]]></fieldDescription>
+	</field>
+	<field name="montoTotalFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoTotalFacturado]]></fieldDescription>
+	</field>
+	<field name="operadores_1" class="java.lang.String">
+		<fieldDescription><![CDATA[operadores]]></fieldDescription>
+	</field>
+	<field name="descripcionServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionServicio]]></fieldDescription>
+	</field>
+	<field name="nroControlfactura" class="java.lang.Long">
+		<fieldDescription><![CDATA[nroControlfactura]]></fieldDescription>
+	</field>
+	<field name="dateInicioOrden" class="java.util.Date">
+		<fieldDescription><![CDATA[dateInicioOrden]]></fieldDescription>
+	</field>
+	<field name="nroOrdenServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[nroOrdenServicio]]></fieldDescription>
+	</field>
+	<field name="nroSolicitud" class="java.lang.String">
+		<fieldDescription><![CDATA[nroSolicitud]]></fieldDescription>
+	</field>
+	<field name="produccionReal" class="java.lang.Double">
+		<fieldDescription><![CDATA[produccionReal]]></fieldDescription>
+	</field>
+	<field name="serieFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[serieFactura]]></fieldDescription>
+	</field>
+	<field name="serieContrato" class="java.lang.String">
+		<fieldDescription><![CDATA[serieContrato]]></fieldDescription>
+	</field>
+	<field name="nroControlContrato" class="java.lang.Long">
+		<fieldDescription><![CDATA[nroControlContrato]]></fieldDescription>
+	</field>
+	<field name="idOrdenTrabajo" class="java.lang.Long">
+		<fieldDescription><![CDATA[idOrdenTrabajo]]></fieldDescription>
+	</field>
+	<field name="idSector" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idSector]]></fieldDescription>
+	</field>
+	<field name="idParroquia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idParroquia]]></fieldDescription>
+	</field>
+	<field name="idLabor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idLabor]]></fieldDescription>
+	</field>
+	<field name="idRubro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idRubro]]></fieldDescription>
+	</field>
+	<field name="idEstadoOrden" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idEstadoOrden]]></fieldDescription>
+	</field>
+	<field name="idMunicipio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idMunicipio]]></fieldDescription>
+	</field>
+	<field name="esTransportado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[esTransportado]]></fieldDescription>
+	</field>
+	<field name="esProduccion" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[esProduccion]]></fieldDescription>
+	</field>
+	<field name="idFinanciamiento" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idFinanciamiento]]></fieldDescription>
+	</field>
+	<field name="idServicio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idServicio]]></fieldDescription>
+	</field>
+	<field name="descripcionParroquia" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionParroquia]]></fieldDescription>
+	</field>
+	<field name="fuenteFinanciamiento" class="java.lang.String">
+		<fieldDescription><![CDATA[fuenteFinanciamiento]]></fieldDescription>
+	</field>
+	<field name="genero" class="java.lang.String">
+		<fieldDescription><![CDATA[genero]]></fieldDescription>
+	</field>
+	<field name="idFinanciamiento_1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idFinanciamiento]]></fieldDescription>
+	</field>
+	<field name="idGenero" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idGenero]]></fieldDescription>
+	</field>
+	<field name="idOrganizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idOrganizacion]]></fieldDescription>
+	</field>
+	<field name="organizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[organizacion]]></fieldDescription>
+	</field>
+	<field name="idTipoOrganizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idTipoOrganizacion]]></fieldDescription>
+	</field>
+	<field name="tipoOrganizacion" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoOrganizacion]]></fieldDescription>
+	</field>
+	<field name="abreviaturaUnidadMedida" class="java.lang.String">
+		<fieldDescription><![CDATA[abreviaturaUnidadMedida]]></fieldDescription>
+	</field>
+	<field name="idUnidadMedida" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idUnidadMedida]]></fieldDescription>
+	</field>
+	<sortField name="idUnidadMedida"/>
+	<sortField name="nroControlfactura"/>
+	<sortField name="cedulaRif"/>
+	<sortField name="descripcionLabor"/>
+	<variable name="pases" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}/$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_montoTotalFacturado_2" class="java.lang.Double" resetType="Group" resetGroup="UnidadMedida" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoTotalFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_cantidaFisicoLaborada_1" class="java.lang.Double" resetType="Group" resetGroup="UnidadMedida" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_cantidalaborEjecutada_1" class="java.lang.Double" resetType="Group" resetGroup="UnidadMedida" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_pases_1" class="java.lang.Float" resetType="Group" resetGroup="UnidadMedida" calculation="Sum">
+		<variableExpression><![CDATA[$V{pases}]]></variableExpression>
+	</variable>
+	<variable name="SUM_produccionReal" class="java.lang.Double" resetType="Group" resetGroup="UnidadMedida" calculation="Sum">
+		<variableExpression><![CDATA[$F{produccionReal}]]></variableExpression>
+	</variable>
+	<group name="UnidadMedida">
+		<groupExpression><![CDATA[$F{idUnidadMedida}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<staticText>
+					<reportElement key="staticText-2" x="705" y="4" width="59" height="9"/>
+					<textElement>
+						<font size="6" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Totales:]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" x="946" y="4" width="50" height="9"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_montoTotalFacturado_2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" x="764" y="4" width="36" height="9"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_cantidaFisicoLaborada_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" mode="Transparent" x="830" y="4" width="40" height="9"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_cantidalaborEjecutada_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement key="textField" x="800" y="4" width="30" height="9"/>
+					<textElement textAlignment="Center">
+						<font size="6" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_pases_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-1" x="11" y="2" width="985" height="1"/>
+				</line>
+				<line>
+					<reportElement key="line-1" x="11" y="13" width="985" height="1"/>
+				</line>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="870" y="4" width="40" height="9"/>
+					<box rightPadding="2"/>
+					<textElement textAlignment="Right">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_produccionReal}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="910" y="4" width="36" height="9"/>
+					<textElement textAlignment="Center">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{abreviaturaUnidadMedida}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<image>
+				<reportElement key="image-1" x="129" y="0" width="750" height="60"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="212" y="45" width="99" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="311" y="45" width="40" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula/ Rif]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="469" y="45" width="55" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="830" y="45" width="40" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laborado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="800" y="45" width="30" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pases]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="764" y="45" width="36" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Físico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="910" y="45" width="36" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="946" y="45" width="50" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total BsF a Pagar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="524" y="45" width="60" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parroquia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="86" y="45" width="32" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Fact. Asociada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="584" y="30" width="412" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Servicio Prestado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="704" y="45" width="60" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rubro]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Opaque" x="212" y="30" width="372" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Datos del Productor"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-1" x="311" y="10" width="393" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Reporte de Servicio de Mecanización Resumido]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Opaque" x="10" y="30" width="202" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Datos de la Orden"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="48" y="45" width="38" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Orden]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="10" y="45" width="38" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="118" y="45" width="94" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fuente Financiamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="644" y="45" width="60" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Labor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="584" y="45" width="60" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio Prestado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="351" y="45" width="19" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="370" y="45" width="99" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Organización]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="870" y="45" width="40" height="20" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Producción Real]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="staticText-1" x="704" y="10" width="292" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Desde: " + $P{fecha} + "   " + "Hasta: " + $P{fechaFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-1" x="10" y="10" width="301" height="20"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sede: " + $P{sede}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="584" y="1" width="60" height="10"/>
+				<box leftPadding="2" rightPadding="1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionServicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="212" y="1" width="99" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombresCliente}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="311" y="1" width="40" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Justified">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedulaRif}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="469" y="1" width="55" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionMunicipio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField" x="704" y="1" width="60" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionRubro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="830" y="1" width="40" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidalaborEjecutada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="800" y="1" width="30" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pases}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="764" y="1" width="36" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidaFisicoLaborada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="946" y="1" width="50" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoTotalFacturado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="86" y="1" width="32" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nroControlfactura}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="48" y="1" width="38" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nroOrdenServicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="10" y="1" width="38" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateInicioOrden}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="644" y="1" width="60" height="10"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionLabor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="524" y="1" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionParroquia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="351" y="1" width="19" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{genero}.trim().substring(0,1).toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="118" y="1" width="94" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fuenteFinanciamiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="370" y="1" width="99" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoOrganizacion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="870" y="1" width="40" height="10"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{produccionReal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="910" y="1" width="36" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{abreviaturaUnidadMedida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="10" y="17" width="301" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Impreso por : "+$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="10" y="7" width="301" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-3" x="856" y="17" width="100" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-4" x="957" y="17" width="39" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30" splitType="Stretch"/>
+	</summary>
+</jasperReport>

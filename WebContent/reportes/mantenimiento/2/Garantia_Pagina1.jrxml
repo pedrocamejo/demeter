@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Garantia_pagina1" language="groovy" pageWidth="374" pageHeight="462" columnWidth="374" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="43"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<title>
+		<band height="15">
+			<frame>
+				<reportElement style="table" x="0" y="0" width="374" height="15"/>
+			</frame>
+			<staticText>
+				<reportElement x="16" y="0" width="214" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUTINARIO DEL OPERADOR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="447">
+			<staticText>
+				<reportElement x="0" y="5" width="374" height="25"/>
+				<textElement textAlignment="Justified">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Antes de poner la maquinaria en funcionamiento realizar los siguientes chequeos(Actividades diarias):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="302" width="326" height="69"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<b>Nota:</b> los Beneficiarios por estas maquinarias, deberan de hacerse responsable de las reparaciones y repuestos tales como: mangueras hidraulicas, baterias, fusibles, cables rotos, bombillos, cauchos. <b>En caso de que el tractor presente alguna falla mayor no deben por ningun motivo, ejecutar reparaciones , a menos que tenga autorizacion generada por esta gerencia y de forma escrita.</b><br>	Para solicitudes de servicios de mantenimiento preventivos y correctovos a los tractores belarus comunicarse con los siguientes contactos : </br>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="30" width="358" height="14"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar nivel de aceite en el motor diesel.</li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="44" width="358" height="14"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar nivel de liquido de enfriamiento en el motor Diesel.</li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="58" width="358" height="27"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar nivel de aceite en el tanque hidraulico y de la direccion
+    hidraulica mixta(DHM).</li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="85" width="358" height="13"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar nivel de aceite de la transmision. </li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="98" width="358" height="26"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Eliminar condesado en el balon del sistema neumatico,(bombin
+    o bomba de cebado). </li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="124" width="358" height="27"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar el funcionamiento del motor diesel, de la ditreccion
+    hidraulica mixta, de los frenos y de los instrumentos de medicion.  </li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="151" width="358" height="13"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Revisar el estado de los cauchos. </li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="164" width="358" height="25"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Limpiar cuidadosamente los filtros de aire y conectores hidraulicos
+    para los implementos. </li>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="189" width="358" height="27"/>
+				<textElement markup="styled">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<li>Rotacion de las baterias para evitar descargas y daños a futuro
+    (Actividad semanal). </li>]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

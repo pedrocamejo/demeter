@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="servicio" class="java.lang.String"/>
+	<parameter name="fechadesde" class="java.lang.String"/>
+	<parameter name="fechahasta" class="java.lang.String"/>
+	<parameter name="labor" class="java.lang.String"/>
+	<parameter name="rubro" class="java.lang.String"/>
+	<parameter name="tipoproductor" class="java.lang.String"/>
+	<parameter name="rangohas" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="labor" class="cpc.modelo.demeter.basico.Labor">
+		<fieldDescription><![CDATA[laborOrden.labor]]></fieldDescription>
+	</field>
+	<field name="servicio" class="cpc.modelo.demeter.basico.Servicio">
+		<fieldDescription><![CDATA[laborOrden.labor.servicio]]></fieldDescription>
+	</field>
+	<field name="tipoServicio" class="cpc.modelo.demeter.basico.TipoServicio">
+		<fieldDescription><![CDATA[laborOrden.labor.servicio.tipoServicio]]></fieldDescription>
+	</field>
+	<field name="rubro" class="cpc.modelo.demeter.basico.Rubro">
+		<fieldDescription><![CDATA[rubro]]></fieldDescription>
+	</field>
+	<field name="productor" class="cpc.modelo.ministerio.gestion.Productor">
+		<fieldDescription><![CDATA[productor]]></fieldDescription>
+	</field>
+	<field name="tipo" class="cpc.modelo.ministerio.basico.TipoProductor">
+		<fieldDescription><![CDATA[productor.tipo]]></fieldDescription>
+	</field>
+	<field name="organizacion" class="cpc.modelo.ministerio.gestion.Organizacion">
+		<fieldDescription><![CDATA[productor.organizacion]]></fieldDescription>
+	</field>
+	<field name="nombreCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[productor.clienteAdministrativo.nombreCliente]]></fieldDescription>
+	</field>
+	<field name="cantidadFisicaTrabajada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidadFisicaTrabajada]]></fieldDescription>
+	</field>
+	<field name="cantidadLaborada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidadLaborada]]></fieldDescription>
+	</field>
+	<field name="strServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[strServicio]]></fieldDescription>
+	</field>
+	<field name="strRubro" class="java.lang.String">
+		<fieldDescription><![CDATA[strRubro]]></fieldDescription>
+	</field>
+	<field name="strLabor" class="java.lang.String">
+		<fieldDescription><![CDATA[strLabor]]></fieldDescription>
+	</field>
+	<field name="nombresProductor" class="java.lang.String">
+		<fieldDescription><![CDATA[productor.nombres]]></fieldDescription>
+	</field>
+	<field name="strTipo" class="java.lang.String">
+		<fieldDescription><![CDATA[productor.strTipo]]></fieldDescription>
+	</field>
+	<field name="juridico" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[productor.tipo.juridico]]></fieldDescription>
+	</field>
+	<field name="strJuridico" class="java.lang.String">
+		<fieldDescription><![CDATA[productor.tipo.strJuridico]]></fieldDescription>
+	</field>
+	<sortField name="strServicio"/>
+	<sortField name="strLabor"/>
+	<sortField name="strRubro"/>
+	<sortField name="strJuridico"/>
+	<variable name="sumaHasFisicas" class="java.lang.Double" resetType="Group" resetGroup="grpServicio" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidadFisicaTrabajada}]]></variableExpression>
+	</variable>
+	<group name="grpServicio">
+		<groupExpression><![CDATA[$F{servicio}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="16" forecolor="#FEFEFE" backcolor="#DBE0D8"/>
+				</rectangle>
+				<textField>
+					<reportElement x="62" y="2" width="487" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{strServicio}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-9" x="3" y="2" width="56" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[SERVICIO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="19">
+				<rectangle>
+					<reportElement x="0" y="0" width="313" height="14" forecolor="#FEFEFE" backcolor="#DBE0D8"/>
+				</rectangle>
+				<staticText>
+					<reportElement key="staticText-9" x="115" y="2" width="193" height="12" forecolor="#495049"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[TOTAL POR SERVICIO]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grpLabor">
+		<groupExpression><![CDATA[$F{rubro}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<rectangle>
+					<reportElement x="60" y="0" width="495" height="18" forecolor="#FEFEFE" backcolor="#DCE8D6"/>
+				</rectangle>
+				<textField>
+					<reportElement x="110" y="3" width="439" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{strLabor}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-9" x="63" y="3" width="42" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[LABOR]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="12">
+				<rectangle>
+					<reportElement x="60" y="0" width="253" height="12" forecolor="#FEFEFE" backcolor="#DCE8D6"/>
+				</rectangle>
+				<staticText>
+					<reportElement key="staticText-9" x="115" y="0" width="193" height="12" forecolor="#495049"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[TOTAL POR LABOR]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grpRubro">
+		<groupExpression><![CDATA[$F{labor}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<rectangle>
+					<reportElement x="106" y="0" width="449" height="16" forecolor="#FEFEFE" backcolor="#EAF1EA"/>
+				</rectangle>
+				<textField>
+					<reportElement x="156" y="2" width="396" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[""+$F{strRubro}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-9" x="110" y="2" width="43" height="12" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[RUBRO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<rectangle>
+					<reportElement x="105" y="0" width="208" height="14" forecolor="#FEFEFE" backcolor="#EAF1EA"/>
+				</rectangle>
+				<staticText>
+					<reportElement key="staticText-9" x="115" y="2" width="193" height="10" forecolor="#495049"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[TOTAL POR RUBRO]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="grpTipoProductor">
+		<groupExpression><![CDATA[$F{strJuridico}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<rectangle>
+					<reportElement x="106" y="0" width="449" height="17" forecolor="#FEFEFE" backcolor="#EAF1EA"/>
+				</rectangle>
+				<staticText>
+					<reportElement key="staticText-9" x="115" y="0" width="198" height="13" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Productor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-9" x="316" y="0" width="52" height="13" forecolor="#495049"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Has. Fisicas]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<rectangle>
+					<reportElement x="106" y="0" width="449" height="18" forecolor="#FEFEFE" backcolor="#EAF1EA"/>
+				</rectangle>
+				<textField>
+					<reportElement x="115" y="2" width="198" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{strTipo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="316" y="3" width="52" height="12"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumaHasFisicas}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="109">
+			<staticText>
+				<reportElement key="staticText-9" x="152" y="52" width="266" height="35" forecolor="#5B5E62"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[REPORTE GENERAL MECANIZADO SERVICIOS PRESTADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="90" width="553" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["PERIODO: DESDE "+$P{fechadesde}+ " HASTA "+$P{fechahasta}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="555" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="10"/>
+	</columnHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="64"/>
+	</pageFooter>
+	<summary>
+		<band height="42"/>
+	</summary>
+</jasperReport>

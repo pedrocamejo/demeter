@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cierreDetalle" pageWidth="612" pageHeight="792" columnWidth="552" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="fecha" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/home/rmantilla/workspace2/demeterZk/WebContent/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="coleccionDocumentos" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="coleccionCtasPorCobrar" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="coleccionCtasPorPagar" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="coleccionDepositos" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="coleccionAdelantos" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="coleccionIngresoCaja" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="ingresoFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[ingresoFacturado]]></fieldDescription>
+	</field>
+	<field name="montoRecibos" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoRecibos]]></fieldDescription>
+	</field>
+	<field name="impuestoFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[impuestoFacturado]]></fieldDescription>
+	</field>
+	<field name="montoDepositado" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoDepositado]]></fieldDescription>
+	</field>
+	<field name="cuentasPorPagar" class="java.lang.Double"/>
+	<sortField name="fecha"/>
+	<variable name="SUM_ingresoFacturado_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ingresoFacturado}]]></variableExpression>
+	</variable>
+	<group name="documentos">
+		<groupExpression><![CDATA[$F{fecha}]]></groupExpression>
+		<groupHeader>
+			<band height="58" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement key="subreport-2" stretchType="RelativeToTallestObject" x="0" y="5" width="550" height="49"/>
+					<dataSourceExpression><![CDATA[$P{coleccionCtasPorCobrar}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"cuentasPorCobrar.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="60" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement key="subreport-5" x="0" y="7" width="550" height="49"/>
+					<dataSourceExpression><![CDATA[$P{coleccionAdelantos}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "adelantos.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="117" splitType="Stretch">
+			<image>
+				<reportElement key="image-1" x="0" y="2" width="550" height="60"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-6" x="0" y="69" width="550" height="18"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Reporte Detallado de Cierre Diario"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-11" x="200" y="87" width="80" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dia:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="282" y="87" width="118" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="58" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" stretchType="RelativeToBandHeight" x="0" y="5" width="550" height="49"/>
+				<dataSourceExpression><![CDATA[$P{coleccionDocumentos}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"documentos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="58" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-3" x="0" y="6" width="550" height="49"/>
+				<dataSourceExpression><![CDATA[$P{coleccionCtasPorPagar}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "cuentasPorPagar.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="25" splitType="Stretch">
+			<textField evaluationTime="Report" pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-2" x="3" y="2" width="300" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-3" x="3" y="12" width="301" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Impreso por : "+$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-4" x="512" y="13" width="39" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-5" x="411" y="13" width="100" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="180" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-6" x="0" y="87" width="550" height="50"/>
+				<dataSourceExpression><![CDATA[$P{coleccionDepositos}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "depositos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-7" x="0" y="8" width="550" height="50"/>
+				<dataSourceExpression><![CDATA[$P{coleccionIngresoCaja}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ingresoscaja.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

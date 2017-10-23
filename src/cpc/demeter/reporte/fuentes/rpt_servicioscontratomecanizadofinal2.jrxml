@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="rpt_servicioscontratomecanizadofinal2"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="907"
+		 columnWidth="612"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.zoom" value="1.3310000000000028" />
+	<property name="ireport.x" value="43" />
+	<property name="ireport.y" value="0" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="NumeroContrato" isForPrompting="true" class="java.lang.Integer">
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT
+
+
+
+
+
+
+
+tbl_dem_contrato.seq_idcontrato,
+administracion.tbl_dem_detallecontrato.int_idservicio as servicio,
+administracion.tbl_dem_detallecontrato.dbl_cantidad as cantidad,
+administracion.tbl_dem_detallecontrato. dbl_preciounidad as preciounidad,
+administracion.tbl_dem_detallecontrato.int_idumedidacobro as medidacobro,
+administracion.tbl_dem_detallecontrato.dbl_subtotal as subtotal,
+public.tbl_dem_servicios.str_nomserv,
+public.tbl_dem_servicios_prestar.str_formula,
+public.tbl_dem_unidad_medidas.str_descripcion,
+public.tbl_dem_unidad_medidas.str_abreviatura
+
+FROM
+     "administracion"."tbl_dem_estado_contrato" tbl_dem_estado_contrato
+     INNER JOIN "administracion"."tbl_dem_contrato" tbl_dem_contrato ON tbl_dem_estado_contrato."seq_idestadocontrato" = tbl_dem_contrato."int_estado"
+
+join administracion.tbl_dem_detallecontrato on administracion.tbl_dem_detallecontrato.int_idcontrato=tbl_dem_contrato.seq_idcontrato
+join public.tbl_dem_servicios on administracion.tbl_dem_detallecontrato.int_idservicio= public.tbl_dem_servicios.seq_idservicio
+join public.tbl_dem_servicios_prestar on administracion.tbl_dem_detallecontrato.int_idservicio = public.tbl_dem_servicios_prestar.int_idservicio
+join public.tbl_dem_unidad_medidas on   administracion.tbl_dem_detallecontrato.int_idumedidacobro=public.tbl_dem_unidad_medidas.seq_idumedida
+
+where tbl_dem_contrato.seq_idcontrato= $P{NumeroContrato}]]></queryString>
+
+	<field name="descripcionProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[producto.descripcion]]></fieldDescription>
+	</field>
+	<field name="cantidad_Producto" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidad]]></fieldDescription>
+	</field>
+	<field name="subtotal_producto" class="java.lang.Double">
+		<fieldDescription><![CDATA[subtotal]]></fieldDescription>
+	</field>
+	<field name="precioUnidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[precioUnidad]]></fieldDescription>
+	</field>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="68"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="17"
+						width="484"
+						height="20"
+						key="textField"
+						positionType="Float"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="URWGothicL" size="16" isBold="true" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Servicios Contratados"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="376"
+						y="46"
+						width="109"
+						height="20"
+						backcolor="#E4E8AB"
+						key="staticText"
+						positionType="Float"/>
+					<box>					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="URWGothicL" size="13" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Monto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="267"
+						y="46"
+						width="109"
+						height="20"
+						backcolor="#E4E8AB"
+						key="staticText"
+						positionType="Float"/>
+					<box>					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="URWGothicL" size="13" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Precio Unitario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="142"
+						y="46"
+						width="125"
+						height="20"
+						backcolor="#E4E8AB"
+						key="staticText"
+						positionType="Float"/>
+					<box>					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="URWGothicL" size="13" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Cantidad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="46"
+						width="142"
+						height="20"
+						backcolor="#E4E8AB"
+						key="staticText"
+						positionType="Float"/>
+					<box>					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="URWGothicL" size="13" isBold="true"/>
+					</textElement>
+				<text><![CDATA[SERVICIO]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="25"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="142"
+						height="25"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="142"
+						y="0"
+						width="125"
+						height="25"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{cantidad_Producto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="376"
+						y="0"
+						width="108"
+						height="25"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{subtotal_producto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="267"
+						y="0"
+						width="109"
+						height="25"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$F{precioUnidad}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

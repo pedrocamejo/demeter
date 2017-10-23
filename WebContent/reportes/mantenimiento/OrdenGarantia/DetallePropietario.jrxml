@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DetallePropietario" language="groovy" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="36"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="identidadLegal" class="java.lang.String"/>
+	<field name="strTelefonos" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<detail>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="10" width="54" height="13"/>
+				<textElement/>
+				<text><![CDATA[Nombres :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="23" width="60" height="15"/>
+				<textElement/>
+				<text><![CDATA[Telefonos :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="6" width="71" height="15"/>
+				<textElement/>
+				<text><![CDATA[Cedula ó Rif :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="38" width="55" height="15"/>
+				<textElement/>
+				<text><![CDATA[Dirección :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="281" y="10" width="161" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="84" y="6" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{identidadLegal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="38" width="374" height="30"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="73" y="23" width="369" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{strTelefonos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

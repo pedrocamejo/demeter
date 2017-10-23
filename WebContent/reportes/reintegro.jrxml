@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reintegro" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="28"/>
+	<subDataset name="recibos">
+		<field name="control" class="java.lang.String"/>
+		<field name="strMonto" class="java.lang.String"/>
+		<field name="strSaldo" class="java.lang.String"/>
+		<field name="formaspago" class="java.util.List"/>
+	</subDataset>
+	<subDataset name="formapago">
+		<field name="strMonto" class="java.lang.String"/>
+		<field name="strBanco" class="java.lang.String"/>
+		<field name="strCuenta" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="sede" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/rchirinos/worskpacenew/demeterSedes/WebContent/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<field name="recibos" class="java.util.List"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="strMontoTotal" class="java.lang.String"/>
+	<field name="control" class="java.lang.String"/>
+	<field name="cliente.identidadLegal" class="java.lang.String"/>
+	<field name="cliente.nombres" class="java.lang.String"/>
+	<field name="cliente.direccion" class="java.lang.String"/>
+	<title>
+		<band height="214" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="44" width="167" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Para : Adminsitracion  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="57" width="167" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[De: Facturacion y Cobranza ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="443" y="50" width="123" height="13"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nro Control :" +$F{control}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="196" y="75" width="175" height="20"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud Reintegro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="63" width="39" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="485" y="63" width="81" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="112" width="565" height="102"/>
+				<textElement textAlignment="Justified">
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA["   Reciba un cordial saludo revolucionario en aras de la construccion de la patria socialista extensiva a todo su equipo de trabajo.    La presente tiene como finalidad  de solicitarle el reintegro al productor "+$F{cliente.nombres}+" pertenecientes a la sede :"+ $P{sede} + " por un monto de "+ $F{strMontoTotal}+ ", el cual deposito en cuentas de la empresa, y a la final por diversas razones no se les realizo el servicio o el monto real del mismo fue menor al depositado   Esta solicitud se basa en el Manual de Políticas y Cobranzas, en el Instructivo, Item 2.9."]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="5" width="561" height="39"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="0" width="161" height="16"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Productor :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="85" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identificación :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="238" y="25" width="50" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="66" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="25" width="126" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cliente.identidadLegal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="25" width="284" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cliente.nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="42" width="487" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cliente.direccion}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="3" y="65" width="569" height="63"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="recibos">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{recibos})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="63" width="569">
+						<staticText>
+							<reportElement x="7" y="3" width="70" height="12"/>
+							<textElement>
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[Recibo Nro : ]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="82" y="3" width="100" height="12"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{control}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="412" y="3" width="151" height="12"/>
+							<textElement textAlignment="Right"/>
+							<textFieldExpression><![CDATA["Monto Recibo "+$F{strMonto}]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement key="table" x="92" y="32" width="471" height="31"/>
+							<jr:table>
+								<datasetRun subDataset="formapago">
+									<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{formaspago})]]></dataSourceExpression>
+								</datasetRun>
+								<jr:column width="160">
+									<jr:tableHeader height="13" rowSpan="1">
+										<staticText>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Left" verticalAlignment="Middle">
+												<font isBold="true"/>
+											</textElement>
+											<text><![CDATA[Banco]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell height="14" rowSpan="1">
+										<textField>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Left"/>
+											<textFieldExpression><![CDATA[$F{strBanco}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="160">
+									<jr:tableHeader height="13" rowSpan="1">
+										<staticText>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font isBold="true"/>
+											</textElement>
+											<text><![CDATA[Cuenta ]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell height="14" rowSpan="1">
+										<textField>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Center"/>
+											<textFieldExpression><![CDATA[$F{strCuenta}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="160">
+									<jr:tableHeader height="13" rowSpan="1">
+										<staticText>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Right" verticalAlignment="Middle">
+												<font isBold="true"/>
+											</textElement>
+											<text><![CDATA[Monto Depositado]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell height="14" rowSpan="1">
+										<textField>
+											<reportElement x="0" y="0" width="160" height="12"/>
+											<textElement textAlignment="Right"/>
+											<textFieldExpression><![CDATA[$F{strMonto}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+							</jr:table>
+						</componentElement>
+						<staticText>
+							<reportElement x="7" y="20" width="100" height="12"/>
+							<textElement>
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[Formas de Pago :]]></text>
+						</staticText>
+						<line>
+							<reportElement x="7" y="0" width="559" height="1"/>
+						</line>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="111">
+			<line>
+				<reportElement x="33" y="78" width="507" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="85" y="79" width="386" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA["200 años despues... Independencia y Revolucion "]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="91" width="436" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Av. Intercomunal Barquisimeto Cabudare, Edificio Sede CVA Pedro Camejo, S.A. piso PB de Central Sector El Carabali, Estado Lara Telfs.:(0251)8089906, 2563316.Ext 332/334 Correo electronico: facturacionycobranzasespc@gmail.com]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudMecanizado" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="321"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="fecha" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cedulaEjecutor" class="java.lang.String">
+		<fieldDescription><![CDATA[cedulaEjecutor]]></fieldDescription>
+	</field>
+	<field name="cedulaResponsable" class="java.lang.String">
+		<fieldDescription><![CDATA[cedulaResponsable]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="fechaAprobacion" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaAprobacion]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="idLegalBeneficiario" class="java.lang.String">
+		<fieldDescription><![CDATA[idLegalBeneficiario]]></fieldDescription>
+	</field>
+	<field name="motivo" class="java.lang.String">
+		<fieldDescription><![CDATA[motivo]]></fieldDescription>
+	</field>
+	<field name="nombreBeneficiario" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreBeneficiario]]></fieldDescription>
+	</field>
+	<field name="nombreEjecutor" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreEjecutor]]></fieldDescription>
+	</field>
+	<field name="nombreResponsable" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreResponsable]]></fieldDescription>
+	</field>
+	<field name="nroControlDocumentoAfectado" class="java.lang.String">
+		<fieldDescription><![CDATA[nroControlDocumentoAfectado]]></fieldDescription>
+	</field>
+	<field name="nroDocumentoAfectado" class="java.lang.String">
+		<fieldDescription><![CDATA[nroDocumentoAfectado]]></fieldDescription>
+	</field>
+	<field name="observacion" class="java.lang.String">
+		<fieldDescription><![CDATA[observacion]]></fieldDescription>
+	</field>
+	<field name="strFechaAprobacion" class="java.lang.String">
+		<fieldDescription><![CDATA[strFechaAprobacion]]></fieldDescription>
+	</field>
+	<field name="tipo" class="cpc.modelo.demeter.administrativo.TipoAprobacionDebitoInterno">
+		<fieldDescription><![CDATA[tipo]]></fieldDescription>
+	</field>
+	<field name="unidadAdministrativa" class="cpc.modelo.sigesp.basico.UnidadAdministrativa">
+		<fieldDescription><![CDATA[unidadAdministrativa]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="364" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-2" x="27" y="54" width="518" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isItalic="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cotizacion de Articulos"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement key="image-1" x="11" y="0" width="550" height="50"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-25" mode="Opaque" x="10" y="84" width="550" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DATOS GENERALES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="99" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedulaEjecutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="119" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cedulaResponsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="139" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaAprobacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="159" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{idLegalBeneficiario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="199" width="366" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreBeneficiario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="219" width="366" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreEjecutor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="239" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombreResponsable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="259" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nroControlDocumentoAfectado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="279" width="367" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nroDocumentoAfectado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="299" width="366" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{strFechaAprobacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="319" width="366" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="339" width="366" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{unidadAdministrativa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="572" height="40"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="572" height="50"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField-21" x="11" y="0" width="301" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Impreso por : "+$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-23" mode="Transparent" x="410" y="0" width="100" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-24" x="511" y="0" width="50" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="97" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-1" x="162" y="0" width="81" height="73"/>
+			</rectangle>
+			<line>
+				<reportElement key="line-3" x="317" y="44" width="143" height="2"/>
+			</line>
+			<line>
+				<reportElement key="line-4" x="317" y="29" width="143" height="2"/>
+			</line>
+			<line>
+				<reportElement key="line-5" x="317" y="57" width="143" height="2"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-26" x="243" y="15" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Responsable:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-27" x="243" y="30" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Cargo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-28" x="243" y="45" width="69" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Firma:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-29" x="162" y="73" width="80" height="15"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Sello]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/index.zul</timeout-uri><!-- An empty URL can cause the browser 
+			to reload the same URL -->
+	</device-config>
+
+	<session-config>
+		<session-timeout>3600</session-timeout>
+		<timer-keep-alive>true</timer-keep-alive>
+		<timer-as-inactive>true</timer-as-inactive>
+	</session-config>
+
+	<device-config>
+		<device-type>ajax</device-type>
+		<server-push-class>org.zkoss.zkex.ui.impl.PollingServerPush</server-push-class>
+	</device-config>
+
+	<listener>
+		<description>ThreadLocal Synchronization Listener
+		</description>
+		<listener-class>org.zkoss.zkplus.util.ThreadLocalListener
+		</listener-class>
+	</listener>
+
+
+	<system-config>
+		<ui-factory-class>org.zkoss.zk.ui.http.SerializableUiFactory</ui-factory-class>
+	</system-config>
+
+	<!-- <desktop-config> <theme-provider-class>cpc.demeter.MyThemeProvider</theme-provider-class> 
+		</desktop-config> -->
+<!-- 	<system-config> -->
+<!--     <id-generator-class>cpc.prueba.SimpleIdGenerator</id-generator-class> -->
+<!-- 	</system-config> -->
+</zk>
+	
+	
+	
+

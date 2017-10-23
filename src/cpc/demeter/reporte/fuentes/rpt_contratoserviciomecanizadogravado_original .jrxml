@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_contratoserviciomecanizado1" language="groovy" pageWidth="612" pageHeight="907" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="121" bottomMargin="75">
+	<property name="ireport.zoom" value="0.7513148009015818"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="384"/>
+	<style name="negrita" isDefault="false" forecolor="#000000" lineSpacing="Double" fontName="DejaVu Sans Mono" isBold="true"/>
+	<style name="normal" isDefault="true" forecolor="#000000" lineSpacing="Double" fontName="DejaVu Sans Mono" isBold="false"/>
+	<parameter name="NumeroContrato" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/erix/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Sede" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+
+tbl_dem_estado_contrato."str_descripcion" AS estadocontrato,
+to_char(tbl_dem_contrato."dtm_fecha", 'dd-mm-yyyy') AS contratodtm_fecha,
+to_char(tbl_dem_contrato."dtm_fechadesde",'dd-mm-yyyy') AS contratofechadesde,
+tbl_dem_contrato.int_idtipocontrato AS tipocontrato,
+tbl_dem_contrato."int_diasvigencia" AS contratodiasvigencia,
+trunc(tbl_dem_contrato.dbl_monto,2) AS contratomonto,
+fu_numero_letras(tbl_dem_contrato.dbl_monto) AS letrasmonto,
+tbl_dem_contrato."bol_pagado" AS pagado,
+tbl_dem_contrato."str_serie" AS contratostr_serie,
+tbl_dem_clientes."str_nombre" as nombrepagador,
+tbl_dem_clientes."str_cedurif"  AS cedurifpagador,
+tbl_dem_contrato."int_nrocontrol" AS contrato_nrocontrol,
+tbl_dem_plan_financiamiento."str_descripcion" AS plan_financiamiento_str_descripcion,
+tbl_dem_plan_financiamiento."bol_objetoventa" AS plan_financiamiento_bol_objetoventa,
+tbl_dem_plan_financiamiento."dtm_fecha" AS plan_financiamiento_dtm_fecha,
+tbl_dem_plan_financiamiento."dbl_porcdesc" AS plan_financiamiento_dbl_porcdesc,
+fu_numero_letras(tbl_dem_contrato.dbl_monto*tbl_dem_plan_financiamiento."dbl_porcinic") as letrasinicial,
+trunc((tbl_dem_contrato.dbl_monto*tbl_dem_plan_financiamiento."dbl_porcinic"),2) as inicial,
+tbl_dem_plan_financiamiento."dbl_porcinic" AS plan_financiamiento_dbl_porcinic,
+fu_numero_letras(tbl_dem_contrato.dbl_monto-(tbl_dem_contrato.dbl_monto*tbl_dem_plan_financiamiento."dbl_porcinic")) as letrasculminacion,
+trunc((tbl_dem_contrato.dbl_monto-(tbl_dem_contrato.dbl_monto*tbl_dem_plan_financiamiento."dbl_porcinic")),2) as culminacion,
+tbl_dem_tipocontrato."str_nombre" as tipocontrato_str_nombre,
+tbl_dem_tipocontrato."str_clausula" AS dem_tipocontrato_str_clausula,
+tbl_dem_control_sede."str_abogado" AS abogado,
+tbl_dem_control_sede."str_impreabogado" AS impreabogado,
+tbl_dem_control_sede."str_direccionsede" AS direccionsede,
+tbl_dem_control_sede."str_coordinadorsede" AS coordinadorsede,
+tbl_dem_control_sede."str_sede" AS str_sede,
+tbl_dem_control_sede."str_codemp" AS str_codemp,
+
+productor."str_nombre" as nombreproductor,
+productor."str_cedurif"  AS cedurifproductor,
+sigesp_estados."desest" AS estadocliente,
+sigesp_municipio."denmun" AS municipiocliente,
+sigesp_parroquia."denpar" AS parroquiacliente,
+tbl_dem_direccion."str_infadicional" AS direccioninfadicionalcliente,
+tbl_dem_direccion."str_ptoreferencia" AS direccionptoreferenciacliente,
+tbl_dem_direccion."str_sector" AS direccionsectorcliente,
+
+tbl_dem_control_sede."str_cedulacoordinadorsede" AS cedulacoordinadorsede,
+
+estadosproduccion."desest" AS estadoproduccion,
+municipioproduccion."denmun" AS municipioproduccion,
+parroquiaproduccion."denpar" AS parroquiaproduccion,
+direccionproduccion."str_infadicional" AS direccionproduccion,
+direccionproduccion."str_ptoreferencia" AS direccionptoreferenciaproduccion,
+direccionproduccion."str_sector" AS direccionsectorproduccion,
+tbl_dem_contrato. int_diasvigencia AS diasvigencia,
+fu_numero_letras_entero(tbl_dem_contrato. int_diasvigencia) as letrasdiasvigencia,
+FLOOR(date_part('day',tbl_dem_contrato."dtm_fechadesde" )) as diafirma,
+FLOOR (date_part('month',tbl_dem_contrato."dtm_fechadesde")) as mesfirma,
+FLOOR (date_part('year',tbl_dem_contrato."dtm_fechadesde" )) as añofirma,
+FLOOR (date_part('day',tbl_dem_contrato."dtm_fecha")) as diaculminacion,
+FLOOR (date_part('month',tbl_dem_contrato."dtm_fecha")) as mesculminacion
+
+FROM
+     "administracion"."tbl_dem_estado_contrato" tbl_dem_estado_contrato
+     INNER JOIN "administracion"."tbl_dem_contrato" tbl_dem_contrato ON tbl_dem_estado_contrato."seq_idestadocontrato" = tbl_dem_contrato."int_estado"
+     INNER JOIN "public"."tbl_dem_clientes" tbl_dem_clientes ON tbl_dem_contrato."int_idpagador" = tbl_dem_clientes."seq_idcliente"
+     INNER JOIN "administracion"."tbl_dem_plan_financiamiento" tbl_dem_plan_financiamiento ON tbl_dem_contrato."int_idplanfinanciamiento" = tbl_dem_plan_financiamiento."seq_idplanfinanciamiento"
+     INNER JOIN "administracion"."tbl_dem_tipocontrato" tbl_dem_tipocontrato ON tbl_dem_contrato."int_idtipocontrato" = tbl_dem_tipocontrato."seq_idtipocontrato"
+
+    INNER JOIN  public.tbl_dem_solicitud on public.tbl_dem_solicitud.seq_idsolicitud=tbl_dem_contrato.int_idsolicitud
+    INNER JOIN administracion.tbl_dem_control_sede on tbl_dem_control_sede.str_sede=tbl_dem_solicitud.int_idsede
+  INNER JOIN "public"."tbl_dem_clientes" productor ON public.tbl_dem_solicitud.int_idcliente= productor."seq_idcliente"
+
+INNER JOIN public.tbl_dem_direccion tbl_dem_direccion ON public.tbl_dem_solicitud.int_idcliente = tbl_dem_direccion."int_idcliente"
+    JOIN "sigesp"."sigesp_parroquia" sigesp_parroquia ON tbl_dem_direccion."str_codpais" = sigesp_parroquia."codpai"
+     AND sigesp_parroquia."codmun" = tbl_dem_direccion."str_codmun"
+     AND sigesp_parroquia."codpar" = tbl_dem_direccion."str_codpar"
+     AND sigesp_parroquia."codest" = tbl_dem_direccion."str_codest"
+     JOIN "sigesp"."sigesp_municipio" sigesp_municipio ON sigesp_parroquia."codpai" = sigesp_municipio."codpai"
+     AND sigesp_municipio."codmun" = sigesp_parroquia."codmun"
+     AND sigesp_municipio."codest" = sigesp_parroquia."codest"
+    JOIN "sigesp"."sigesp_municipio" sigesp_municipio_A ON sigesp_parroquia."codpai" = sigesp_municipio_A."codpai"
+     AND sigesp_municipio_A."codmun" = sigesp_parroquia."codmun"
+     AND sigesp_municipio_A."codest" = sigesp_parroquia."codest"
+    JOIN "sigesp"."sigesp_estados" sigesp_estados ON sigesp_municipio_A."codpai" = sigesp_estados."codpai"
+     AND sigesp_estados."codest" = sigesp_municipio_A."codest"
+     AND sigesp_estados."codpai" = sigesp_municipio."codpai"
+     AND sigesp_estados."codest" = sigesp_municipio."codest"
+
+    INNER JOIN public.tbl_dem_direccion direccionproduccion ON tbl_dem_contrato.int_iddireccion = direccionproduccion.seq_iddireccion
+        JOIN "sigesp"."sigesp_parroquia" parroquiaproduccion ON direccionproduccion."str_codpais" = sigesp_parroquia."codpai"
+     AND parroquiaproduccion."codmun" = direccionproduccion."str_codmun"
+     AND parroquiaproduccion."codpar" = direccionproduccion."str_codpar"
+     AND parroquiaproduccion."codest" = direccionproduccion."str_codest"
+     JOIN "sigesp"."sigesp_municipio" municipioproduccion ON parroquiaproduccion."codpai" = municipioproduccion."codpai"
+     AND municipioproduccion."codmun" = parroquiaproduccion."codmun"
+     AND municipioproduccion."codest" = parroquiaproduccion."codest"
+    JOIN "sigesp"."sigesp_municipio" municipioproduccionA ON parroquiaproduccion."codpai" = municipioproduccionA."codpai"
+     AND municipioproduccionA."codmun" = parroquiaproduccion."codmun"
+     AND municipioproduccionA."codest" = parroquiaproduccion."codest"
+    JOIN "sigesp"."sigesp_estados"  estadosproduccion ON municipioproduccionA."codpai" = estadosproduccion."codpai"
+     AND estadosproduccion."codest" = municipioproduccionA."codest"
+     AND estadosproduccion."codpai" = municipioproduccionA."codpai"
+     AND estadosproduccion."codest" = municipioproduccionA."codest"
+where tbl_dem_contrato.int_idtipocontrato =1 and tbl_dem_contrato.seq_idcontrato= $P{NumeroContrato}]]>
+	</queryString>
+	<field name="estadocontrato" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contratodtm_fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contratofechadesde" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipocontrato" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contratodiasvigencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contratomonto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="letrasmonto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pagado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contratostr_serie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombrepagador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedurifpagador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contrato_nrocontrol" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plan_financiamiento_str_descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plan_financiamiento_bol_objetoventa" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plan_financiamiento_dtm_fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plan_financiamiento_dbl_porcdesc" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="letrasinicial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="inicial" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plan_financiamiento_dbl_porcinic" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="letrasculminacion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="culminacion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipocontrato_str_nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dem_tipocontrato_str_clausula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="abogado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="impreabogado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionsede" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="coordinadorsede" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="str_sede" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="str_codemp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreproductor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedurifproductor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estadocliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="municipiocliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parroquiacliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccioninfadicionalcliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionptoreferenciacliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionsectorcliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedulacoordinadorsede" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estadoproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="municipioproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parroquiaproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionptoreferenciaproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionsectorproduccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diasvigencia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="letrasdiasvigencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diafirma" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mesfirma" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="añofirma" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diaculminacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mesculminacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="clausulaA" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? "X" :"_"]]></variableExpression>
+	</variable>
+	<variable name="clausulaAmontoletras" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{letrasmonto} : "_______________________________ ____________________________________ ________________________"]]></variableExpression>
+	</variable>
+	<variable name="clausulaAmonto" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{contratomonto}:"_____________"]]></variableExpression>
+	</variable>
+	<variable name="clausulaAinicialletras" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{letrasinicial} : "_____________________________ ___________________________________________ _________________"]]></variableExpression>
+	</variable>
+	<variable name="variclausulaAinical" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{inicial}:"_____________"]]></variableExpression>
+	</variable>
+	<variable name="clausulaAculminacionletras" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{letrasculminacion} :"__________________________ _______________________________________ ________________________"]]></variableExpression>
+	</variable>
+	<variable name="clausulaAculmiacion" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{culminacion}:"_____________"]]></variableExpression>
+	</variable>
+	<variable name="clausulaB" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(2)  ? "X" :"_"]]></variableExpression>
+	</variable>
+	<variable name="clausulaC" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(3)  ? "X" :"_"]]></variableExpression>
+	</variable>
+	<variable name="clausulaCpagador" class="java.lang.String">
+		<variableExpression><![CDATA[$F{tipocontrato}.equals(1)  ? $F{nombrepagador} :"_____________________________ ________________________"]]></variableExpression>
+	</variable>
+	<variable name="paguina" class="java.lang.String">
+		<variableExpression><![CDATA["Entre la Empresa  Socialista <b>“CVA COMPAÑÍA DE MECANIZADO AGRICOLA Y TRANSPORTE PEDRO CAMEJO, S.A.”</b> inscrita ante  el Registro Mercantil Segundo de la Circunscripción Judicial del Estado Lara en fecha 28 de agosto de 2007, anotado bajo el Nº 50, del Tomo 80-A, publicado en Gaceta Oficial Nº 38.761 del 4 de septiembre de 2007, representada en este acto por el Coordinador Regional de la sucursal ubicada en <b><u>"+ $F{direccionsede}+"</u></b> ciudadano <b><u>"+$F{coordinadorsede}+"</u></b>. venezolano, portador de la cédula de identidad Nº<b><u> "+$F{cedulacoordinadorsede} +
+"</u></b>, por delegación del Directorio de CVA Compañía de Mecanizado Agrícola y Transporte Pedro Camejo, S.A., en lo sucesivo <b>“LA EMPRESA”</b>, por un lado; y, por el otro, el ciudadano<b><u> "+$F{nombreproductor}+"</u></b> . portador de la cédula de identidad Nº <b><u> "+$F{cedurifproductor}+"</u></b>, residenciado en el estado <b><u> "
++$F{estadocliente}+"</u></b> municipio <b><u> "+$F{municipiocliente}+"</u></b> parroquia <b><u>"+$F{parroquiacliente}+"</u></b>, quien a los efectos de este contrato se denominará <b>“EL PRODUCTOR”</b>,"+
+" se ha convenido en celebrar un <b>CONTRATO DE SERVICIOS DE MECANIZACIÓN AGRÍCOLA</b>, en atención a  alguna de las siguientes  modalidades:<br>"
++"<b>CONDICIONES PARTICULARES:</b><br>"
++"(<b>"+$V{clausulaA}+"</b>)<b>a) SERVICIO GRAVADO:</b><b>“EL PRODUCTOR”</b> cancelará a <b>“LA EMPRESA”</b> la cantidad de <b><u>"+$V{clausulaAmontoletras}+"</u></b>  <b><u>(Bs."+$V{clausulaAmonto}+")</u></b>, de la siguiente manera:"
++" La cantidad de <b><u>"+$V{clausulaAinicialletras}+"</u></b> <b><u>(Bs."+$V{variclausulaAinical}+")</u></b> como anticipo con la firma del Contrato de Servicio."+
+"Y la cantidad de <b><u>"+$V{clausulaAculminacionletras}+"</u></b><b><u>(Bs."+$V{clausulaAculmiacion}+")</u></b> al culminar la prestación del servicio objeto del presente contrato."
++" El precio indicado en este literal solo incluye el servicio de mecanización agrícola a través de las maquinarias propiedad de “LA EMPRESA”  en el sitio donde se prestará el servicio."+
+"<br><b>PARÁGRAFO ÚNICO:</b> A los efectos de la condición anterior, “EL PRODUCTOR” se compromete a cancelar el trabajo ejecutado por el personal que a su cargo se dedique a cargar y descargar los"
++" rubros agrícolas o cosechas objeto del presente contrato; y todo lo relativo a los operadores de las maquinarias utilizadas para cumplir con el objeto del presente contrato será por cuenta exclusiva de “LA EMPRESA”. En este orden de ideas; el control de la gestión administrativa de los pagos a realizarse hacia <b>“LA EMPRESA”</b> será llevado por ésta a través de la relación que para tal fin se efectúe. Los montos indicados han sido fijados por la Corporación "
++"Venezolana Agraria según Punto de Cuenta al Ciudadano Ministro <b>Nº 0627</b>, de fecha <b>15/10/08</b>. Los montos han sido establecidos como <b>TABLA DE COSTOS DE LOS SERVICIOS DE MECANIZACIÓN AGRÍCOLA Y TRANSPORTE PRESTADOS POR LA EMPRESA SOCIALISTA CVA COMPAÑÍA DE MECANIZADO AGRÍCOLA Y TRANSPORTE PEDRO CAMEJO, S.A."
++"Y QUE NO SE ENCUENTRAN FIJADOS EN GACETA OFICIAL DE LA REPÚBLICA BOLIVARIANA DE VENEZUELA.</b>"+
+
+"<br><b>CONDICIONES GENERALES</b>"+
+"<br><b>CLÁUSULA PRIMERA:</b> El objeto del presente contrato será la Prestación del Servicio de Mecanizado Agrícola y Transporte, incluyendo de ser el caso en concreto; los servicios estipulados en el anexo <b>“A”</b> por parte de <b>“LA EMPRESA”</b> hacia <b>“EL PRODUCTOR”</b> que para tal fin se establezcan.              <br> "]]></variableExpression>
+	</variable>
+	<variable name="i" class="java.lang.Integer">
+		<variableExpression><![CDATA[2260]]></variableExpression>
+		<initialValueExpression><![CDATA[2260]]></initialValueExpression>
+	</variable>
+	<variable name="i2" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{paguina}.length()-1]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String" calculation="Count">
+		<variableExpression><![CDATA[($V{paguina}[$V{i}].equals(" ")  ? $V{paguina}.substring( 0, $V{i} ) : $V{paguina}[$V{i}-1].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-1 )  :$V{paguina}[$V{i}-2].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-2 ):$V{paguina}[$V{i}-3].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-3 ):$V{paguina}[$V{i}-4].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-4 ):$V{paguina}[$V{i}-5].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-5 ):$V{paguina}[$V{i}-6].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-6 ):$V{paguina}[$V{i}-7].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-7 ):$V{paguina}[$V{i}-8].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-8 ):$V{paguina}[$V{i}-9].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-9 ):$V{paguina}[$V{i}-10].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-10 ):$V{paguina}[$V{i}-11].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-11 )  :$V{paguina}[$V{i}-12].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-12 ):$V{paguina}[$V{i}-13].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-13 ):$V{paguina}[$V{i}-14].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-14 ):$V{paguina}[$V{i}-15].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-15 ):$V{paguina}[$V{i}-16].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-16 ):$V{paguina}[$V{i}-17].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-17 ):$V{paguina}[$V{i}-18].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-18 ):$V{paguina}[$V{i}-19].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-19 ):$V{paguina}[$V{i}-20].equals(" ")  ? $V{paguina}.substring( 0, $V{i}-20 ):"")]]></variableExpression>
+	</variable>
+	<variable name="l1" class="java.lang.Integer">
+		<variableExpression><![CDATA[($V{variable1}.length())]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina}[$V{i2}].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2} ) : $V{paguina}[$V{i2}-1].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-1 )  :$V{paguina}[$V{i2}-2].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-2 ):$V{paguina}[$V{i2}-3].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-3 ):$V{paguina}[$V{i2}-4].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-4 ):$V{paguina}[$V{i2}-5].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-5 ):$V{paguina}[$V{i2}-6].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-6 ):$V{paguina}[$V{i2}-7].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-7 ):$V{paguina}[$V{i2}-8].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-8 ):$V{paguina}[$V{i2}-9].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-9 ):$V{paguina}[$V{i2}-10].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-10 ):$V{paguina}[$V{i2}-11].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-11 )  :$V{paguina}[$V{i2}-12].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-12 ):$V{paguina}[$V{i2}-13].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-13 ):$V{paguina}[$V{i2}-14].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-14 ):$V{paguina}[$V{i2}-15].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-15 ):$V{paguina}[$V{i2}-16].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-16 ):$V{paguina}[$V{i2}-17].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-17 ):$V{paguina}[$V{i2}-18].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-18 ):$V{paguina}[$V{i2}-19].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-19 ):$V{paguina}[$V{i2}-20].equals(" ")  ? $V{paguina}.substring( $V{l1}, $V{i2}-20 ):"")]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="paguina2" class="java.lang.String">
+		<variableExpression><![CDATA["<b>CLÁUSULA SEGUNDA:</b> Forman parte integrante del presente contrato  los  siguientes   documentos complementarios que se anexan firmados por las partes: <b>a)</b> Solicitud del Servicio de Mecanizado Agrícola y/o Transporte. <b>b)</b> Informe técnico del Consejo de Mecanización. <b>c)</b> Aprobación de la Exoneración. <b>d)</b> Contrato de Financiamiento. <b>e)</b> Informe de Condonación.<b> f)</b>Alteración del costo inicial del servicio.<b> g)</b> Relación de Cuentas pendientes, recibos y notas de créditos del presente contrato.<b> h)</b> Relación de Inventario de la Maquinaria."+
+"<br><b>CLÁUSULA TERCERA: “LA EMPRESA”, </b>prestará sus servicios de mecanización agrícola y/o transporte a “EL PRODUCTOR” consistentes en ____________ en una unidad de producción ubicada en el estado<b><u>"+$F{estadoproduccion}+"</b></u>municipio<b><u> "+$F{municipioproduccion}+"</u></b> "
++" sector <b><u>"+$F{direccionsectorproduccion}+"</u></b>en el período comprendido entre <b>"+$F{contratofechadesde}+"</b> y el <b>"+$F{contratodtm_fecha}+"</b>."
+
++"<br><b> PARÁGRAFO ÚNICO: </b> Queda entendido que el Servicio acordado en este contrato, incluye el transporte de las maquinarias hasta el sitio donde se prestará el servicio y viceversa."+
+"<b>CLÁUSULA CUARTA:</b> Para la prestación de los servicios objeto del presente contrato,<b>“LA EMPRESA”</b> empleará sus propias maquinarias y equipos identificados en el anexo <b>“g”</b> el cual forma parte integrante del presente contrato que serán operadas exclusivamente por el personal de <b>“LA EMPRESA”</b> contratado para tal fin."+
+"<br><b>PARÁGRAFO PRIMERO: </b>A los efectos de esta cláusula, <b>“EL PRODUCTOR”</b> se compromete durante esta etapa del servicio; no exceder el trabajo que realizarán los Operadores de Máquinas; siendo exclusiva potestad de <b>“LA EMPRESA”</b>, supervisar, dirigir y encomendar obligaciones al personal que presta el servicio bajo la dependencia de ella.<br>"
++ "<b>PARÁGRAFO SEGUNDO:</b> Así mismo; se compromete y obliga <b>“EL PRODUCTOR”</b> a resguardar, proteger y salvaguardar los bienes de <b>“LA EMPRESA”</b> que serán suministrados por esta para el servicio de mecanizado agrícola y transporte; por lo que será de su única y exclusiva responsabilidad todo aquel daño y perjuicio que sean ocasionados a dichos bienes.             "+
+"<br><b>CLÁUSULA QUINTA:</b> Previamente al inicio de la prestación del servicio de mecanizado, <b>“EL PRODUCTOR”</b> estará sujeto a una evaluación y estudio técnico de campo con las maquinarias requeridas para tal fin; a los efectos de verificar y establecer con precisión, el objeto del servicio en cuanto a implementos y maquinarias a utilizar; así como el área de terreno a cosechar. Este informe técnico formará parte integrante del presente contrato y determinará la aprobación o no del financiamiento que pueda ser solicitado por <b>“EL PRODUCTOR”</b>, así como la forma de pago a ejecutarse."
++"<br><b>CLÁUSULA SEXTA:</b> A los efectos de la protección y seguridad ambientales,<b>“LA EMPRESA”</b> se reserva el derecho de la no aplicación de los agroquímicos que componen la docena sucia, con fines de prevenir riesgos ambientales y laborales. Así mismo;  <b>“LA EMPRESA”</b> restringirá la aplicación de agrotóxicos de clasificación Roja."+
+"En este sentido; se establecen las siguientes obligaciones para <b>“EL PRODUCTOR”</b> <b>a)</b> Asegurar el agua suficiente para el lavado de las maquinarias al haber usado agroquímicos; <b>b)</b> Realizar la dosificación indicada por cada producto; <b>c)</b> Preparar las mezclas respetando las indicaciones de la etiqueta; <b>d)</b> No realizar cócteles (OJO); y, <b>e)</b> Respetar de manera estricta los intervalos establecidos por el fabricante, y señalados en la etiqueta de los plaguicidas entre el tratamiento del cultivo y la reentrada al mismo. En caso de no indicarse se deben dejar pasar al menos veinticuatro (24) horas contados desde la última aplicación antes de reingresar al área tratada."
++ "<br><b>CLÁUSULA SÉPTIMA:</b> Cuando el equipo suministrado tenga que permanecer en la unidad de producción de <b>“EL PRODUCTOR”</b>, este se obliga a su resguardo, custodia y vigilancia prestando para ello la diligencia y eficiencia de un buen padre de familia, toda vez que en caso de daño, deterioro o pérdida causada a los equipos suministrados será responsabilidad de <b> “EL PRODUCTOR” </b> .   "
++"<br><b>CLÁUSULA OCTAVA:</b> Si por hechos imputables o no a <b>“EL PRODUCTOR”</b> se produjeran circunstancias que no permitan cumplir con lo establecido en el contrato de servicios; éste podrá solicitar el financiamiento especial fundamentando dichas circunstancias y el Consejo de Mecanización decidirá al tercer (3er) día siguiente a dicha solicitud. A manera enunciativa más no taxativa, tenemos los siguientes hechos:" +"<br><b>a)</b>Pérdida de la cosecha o producción por hechos de la naturaleza como lluvias, plagas, entre otros." +"<br><b>b)</b> Que el terreno sobre el cual se está ejecutando el servicio de mecanización y/o transporte, no haya podido ser explotado en su totalidad por no estar dadas las condiciones naturales (subsuelo no apto cuando se esté en proceso de arado o limpieza) del mismo." +"<br><b>c)</b>Que haya habido extralimitación por parte de “EL PRODUCTOR” en cuanto a la extensión de terreno a trabajar.          "+
+"<b>d)</b>Que las maquinarias asignadas para la prestación del servicio hayan presentado fallas o daños que generen cambios que ameriten su reparación inmediata y por tal razón, la paralización del servicio."
++"<br><b>CLÁUSULA NOVENA:</b> <b>“LA EMPRESA”</b>, se reserva expresamente el derecho de rescindir el presente contrato en cualquier momento y mediante simple notificación por escrito, por las siguientes causas:"
++"<br><b>1.</b>Cuando <b>“EL PRODUCTOR”</b>, sugiera que <b>“LA EMPRESA”</b>, realice trabajos contraviniendo las disposiciones del presente contrato o cuando pretenda que realice una cantidad de trabajo que no corresponda al tiempo invertido en la misma, de manera que ello no permita la conclusión del trabajo en el plazo estipulado."
++"<br><b>2.</b>Cuando <b>“EL PRODUCTOR”</b>, sin previo conocimiento, aprobación y autorización dada por escrita por <b>“LA EMPRESA”</b>, subcontrate, ceda o traspase este contrato en todo o en parte."
++"<br><b>3.</b>Por la interrupción injustificada de los SERVICIOS DE MECANIZACION por más de CINCO (05) días continuos. "
++"<br><b>4.</b>Cuando <b>“EL PRODUCTOR”</b> incumpliere en la forma de pago convenida en el presente contrato; exceptuando aquellos casos en los cuales se ha solicitado un plan de financiamiento y haya sido debidamente aprobado por <b>“LA EMPRESA”</b>. Sin perjuicio que <b>“LA EMPRESA”</b> pueda ejercer las acciones correspondientes una vez que <b>“EL PRODUCTOR”</b> tampoco cumpla con lo pautado en ese nuevo financiamiento especial.        "]]></variableExpression>
+	</variable>
+	<variable name="l2" class="java.lang.Integer">
+		<variableExpression><![CDATA[(($V{l1})+($V{variable2}.length()))]]></variableExpression>
+	</variable>
+	<variable name="p2l1" class="java.lang.Integer">
+		<variableExpression><![CDATA[2200]]></variableExpression>
+	</variable>
+	<variable name="p2l2" class="java.lang.Integer">
+		<variableExpression><![CDATA[4250]]></variableExpression>
+	</variable>
+	<variable name="p2l3" class="java.lang.Integer">
+		<variableExpression><![CDATA[6250]]></variableExpression>
+	</variable>
+	<variable name="p2l4" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{paguina2}.length()-1]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina2}[$V{p2l1}].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1} ) : $V{paguina2}[$V{p2l1}-1].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-1 )  :$V{paguina2}[$V{p2l1}-2].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-2 ):$V{paguina2}[$V{p2l1}-3].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-3 ):$V{paguina2}[$V{p2l1}-4].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-4 ):$V{paguina2}[$V{p2l1}-5].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-5 ):$V{paguina2}[$V{p2l1}-6].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-6 ):$V{paguina2}[$V{p2l1}-7].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-7 ):$V{paguina2}[$V{p2l1}-8].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-8 ):$V{paguina2}[$V{p2l1}-9].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-9 ):$V{paguina2}[$V{p2l1}-10].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-10 ):$V{paguina2}[$V{p2l1}-11].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-11 )  :$V{paguina2}[$V{p2l1}-12].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-12 ):$V{paguina2}[$V{p2l1}-13].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-13 ):$V{paguina2}[$V{p2l1}-14].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-14 ):$V{paguina2}[$V{p2l1}-15].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-15 ):$V{paguina2}[$V{p2l1}-16].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-16 ):$V{paguina2}[$V{p2l1}-17].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-17 ):$V{paguina2}[$V{p2l1}-18].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-18 ):$V{paguina2}[$V{p2l1}-19].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-19 ):$V{paguina2}[$V{p2l1}-20].equals(" ")  ? $V{paguina2}.substring( 0, $V{p2l1}-20 ):"")]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="lp3" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{variable3}.length()]]></variableExpression>
+	</variable>
+	<variable name="variable4" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina2}[$V{p2l2}].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2} ) : $V{paguina2}[$V{p2l2}-1].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-1 )  :$V{paguina2}[$V{p2l2}-2].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-2 ):$V{paguina2}[$V{p2l2}-3].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-3 ):$V{paguina2}[$V{p2l2}-4].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-4 ):$V{paguina2}[$V{p2l2}-5].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-5 ):$V{paguina2}[$V{p2l2}-6].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-6 ):$V{paguina2}[$V{p2l2}-7].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-7 ):$V{paguina2}[$V{p2l2}-8].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-8 ):$V{paguina2}[$V{p2l2}-9].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-9 ):$V{paguina2}[$V{p2l2}-10].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-10 ):$V{paguina2}[$V{p2l2}-11].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-11 )  :$V{paguina2}[$V{p2l2}-12].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-12 ):$V{paguina2}[$V{p2l2}-13].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-13 ):$V{paguina2}[$V{p2l2}-14].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-14 ):$V{paguina2}[$V{p2l2}-15].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-15 ):$V{paguina2}[$V{p2l2}-16].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-16 ):$V{paguina2}[$V{p2l2}-17].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-17 ):$V{paguina2}[$V{p2l2}-18].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-18 ):$V{paguina2}[$V{p2l2}-19].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-19 ):$V{paguina2}[$V{p2l2}-20].equals(" ")  ? $V{paguina2}.substring( $V{lp3}, $V{p2l2}-20 ):"")]]></variableExpression>
+	</variable>
+	<variable name="lp4" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{lp3}+$V{variable4}.length()]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina2}[$V{p2l3}].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3} ) : $V{paguina2}[$V{p2l3}-1].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-1 )  :$V{paguina2}[$V{p2l3}-2].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-2 ):$V{paguina2}[$V{p2l3}-3].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-3 ):$V{paguina2}[$V{p2l3}-4].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-4 ):$V{paguina2}[$V{p2l3}-5].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-5 ):$V{paguina2}[$V{p2l3}-6].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-6 ):$V{paguina2}[$V{p2l3}-7].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-7 ):$V{paguina2}[$V{p2l3}-8].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-8 ):$V{paguina2}[$V{p2l3}-9].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-9 ):$V{paguina2}[$V{p2l3}-10].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-10 ):$V{paguina2}[$V{p2l3}-11].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-11 )  :$V{paguina2}[$V{p2l3}-12].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-12 ):$V{paguina2}[$V{p2l3}-13].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-13 ):$V{paguina2}[$V{p2l3}-14].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-14 ):$V{paguina2}[$V{p2l3}-15].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-15 ):$V{paguina2}[$V{p2l3}-16].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-16 ):$V{paguina2}[$V{p2l3}-17].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-17 ):$V{paguina2}[$V{p2l3}-18].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-18 ):$V{paguina2}[$V{p2l3}-19].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-19 ):$V{paguina2}[$V{p2l3}-20].equals(" ")  ? $V{paguina2}.substring( $V{lp4}, $V{p2l3}-20 ):"")]]></variableExpression>
+	</variable>
+	<variable name="lp5" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{lp4}+$V{variable5}.length()]]></variableExpression>
+	</variable>
+	<variable name="variable6" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina2}[$V{p2l4}].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4} ) : $V{paguina2}[$V{p2l4}-1].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-1 )  :$V{paguina2}[$V{p2l4}-2].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-2 ):$V{paguina2}[$V{p2l4}-3].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-3 ):$V{paguina2}[$V{p2l4}-4].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-4 ):$V{paguina2}[$V{p2l4}-5].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-5 ):$V{paguina2}[$V{p2l4}-6].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-6 ):$V{paguina2}[$V{p2l4}-7].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-7 ):$V{paguina2}[$V{p2l4}-8].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-8 ):$V{paguina2}[$V{p2l4}-9].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-9 ):$V{paguina2}[$V{p2l4}-10].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-10 ):$V{paguina2}[$V{p2l4}-11].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-11 )  :$V{paguina2}[$V{p2l4}-12].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-12 ):$V{paguina2}[$V{p2l4}-13].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-13 ):$V{paguina2}[$V{p2l4}-14].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-14 ):$V{paguina2}[$V{p2l4}-15].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-15 ):$V{paguina2}[$V{p2l4}-16].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-16 ):$V{paguina2}[$V{p2l4}-17].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-17 ):$V{paguina2}[$V{p2l4}-18].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-18 ):$V{paguina2}[$V{p2l4}-19].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-19 ):$V{paguina2}[$V{p2l4}-20].equals(" ")  ? $V{paguina2}.substring( $V{lp5}, $V{p2l4}-20 ):"")]]></variableExpression>
+	</variable>
+	<variable name="paguina3" class="java.lang.String">
+		<variableExpression><![CDATA["<br><b>CLÁUSULA DÉCIMA:</b> De producirse lo regulado en el numeral cuatro (4) de la Cláusula Sexta de este contrato; se establecerá un procedimiento para que <b>“EL PRODUCTOR”</b> pueda previa solicitud y aprobación de <b>“LA EMPRESA”</b>, ser financiado en el servicio de mecanizado agrícola y transporte; para lo que deberá cumplir con la formalización de la solicitud de financiamiento; así como de todos los recaudos exigidos por <b>“LA EMPRESA”</b>. Igualmente; cuando por causas no imputables a <b>“EL PRODUCTOR”</b>, sea necesario el refinanciamiento o la condonación de una"
++ " deuda existente, será el Comité de Mecanización quien determine la procedencia o no de este tipo de solicitudes fijando el procedimiento idóneo para que se materialice."
++"<br><b>CLÁUSULA DÉCIMA PRIMERA:</b> Todo financiamiento especial, alteración del costo originario del contrato o cualquiera condición que modifique a este, deberá suscribirse entre <b>“LA EMPRESA”</b> y <b>“EL PRODUCTOR”</b> mediante documento elaborado o Addéndum para tal fin formando parte integrante del contrato."
++"<br><b>CLÁUSULA DÉCIMA SEGUNDA:</b> <b>“EL PRODUCTOR”</b> no podrá ceder o transferir en modo alguno, total ni parcialmente el servicio objeto de este contrato, siendo nulo y sin valor alguno cualquier acuerdo celebrado en contravención a la presente cláusula." +"<b>CLÁUSULA DÉCIMA TERCERA:</b> Este contrato tendrá una vigencia de<b> "+$F{letrasdiasvigencia}
++"</b> (<b>"+$F{diasvigencia}+"</b>) dias, contados a partir del <b>"+ $F{diafirma}+"</b>  de <b>"+$F{mesfirma}+ "</b> de <b>"+$F{añofirma}+"</b> hasta el día." +"<br><b>CLÁUSULA DÉCIMA CUARTA:</b> Regirán las disposiciones legales y vigentes aplicables en esta materia, en todo lo que no esté expresamente previsto en este contrato."
++"<br><b>CLÁUSULA DÉCIMA QUINTA:</b> Para todos los efectos de este contrato, así como de sus obligaciones derivadas y consecuencias, se elige como domicilio especial la ciudad de Barquisimeto, estado Lara, a la jurisdicción de cuyos tribunales acuerdan someterse las partes." +"<br>Se hacen dos (03) ejemplares del mismo tenor y a un solo efecto. En <b>" + $P{Sede} +"</b>, a los <b>"+ $F{diafirma}
++"</b> días del mes de <b>"+ $F{mesfirma} +" </b> del año <b> "+$F{añofirma}+"</b>.    "]]></variableExpression>
+	</variable>
+	<variable name="p3l1" class="java.lang.Integer">
+		<variableExpression><![CDATA[1590]]></variableExpression>
+	</variable>
+	<variable name="p3l2" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{paguina3}.length()-1]]></variableExpression>
+	</variable>
+	<variable name="variable7" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina3}[$V{p3l1}].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1} ) : $V{paguina3}[$V{p3l1}-1].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-1 )  :$V{paguina3}[$V{p3l1}-2].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-2 ):$V{paguina3}[$V{p3l1}-3].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-3 ):$V{paguina3}[$V{p3l1}-4].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-4 ):$V{paguina3}[$V{p3l1}-5].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-5 ):$V{paguina3}[$V{p3l1}-6].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-6 ):$V{paguina3}[$V{p3l1}-7].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-7 ):$V{paguina3}[$V{p3l1}-8].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-8 ):$V{paguina3}[$V{p3l1}-9].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-9 ):$V{paguina3}[$V{p3l1}-10].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-10 ):$V{paguina3}[$V{p3l1}-11].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-11 )  :$V{paguina3}[$V{p3l1}-12].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-12 ):$V{paguina3}[$V{p3l1}-13].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-13 ):$V{paguina3}[$V{p3l1}-14].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-14 ):$V{paguina3}[$V{p3l1}-15].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-15 ):$V{paguina3}[$V{p3l1}-16].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-16 ):$V{paguina3}[$V{p3l1}-17].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-17 ):$V{paguina3}[$V{p3l1}-18].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-18 ):$V{paguina3}[$V{p3l1}-19].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-19 ):$V{paguina3}[$V{p3l1}-20].equals(" ")  ? $V{paguina3}.substring( 0, $V{p3l1}-20 ):"")]]></variableExpression>
+	</variable>
+	<variable name="lp6" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{variable7}.length()]]></variableExpression>
+	</variable>
+	<variable name="variable8" class="java.lang.String">
+		<variableExpression><![CDATA[($V{paguina3}[$V{p3l2}].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2} ) : $V{paguina3}[$V{p3l2}-1].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-1 )  :$V{paguina3}[$V{p3l2}-2].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-2 ):$V{paguina3}[$V{p3l2}-3].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-3 ):$V{paguina3}[$V{p3l2}-4].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-4 ):$V{paguina3}[$V{p3l2}-5].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-5 ):$V{paguina3}[$V{p3l2}-6].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-6 ):$V{paguina3}[$V{p3l2}-7].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-7 ):$V{paguina3}[$V{p3l2}-8].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-8 ):$V{paguina3}[$V{p3l2}-9].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-9 ):$V{paguina3}[$V{p3l2}-10].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-10 ):$V{paguina3}[$V{p3l2}-11].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-11 )  :$V{paguina3}[$V{p3l2}-12].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-12 ):$V{paguina3}[$V{p3l2}-13].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-13 ):$V{paguina3}[$V{p3l2}-14].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-14 ):$V{paguina3}[$V{p3l2}-15].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-15 ):$V{paguina3}[$V{p3l2}-16].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-16 ):$V{paguina3}[$V{p3l2}-17].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-17 ):$V{paguina3}[$V{p3l2}-18].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-18 ):$V{paguina3}[$V{p3l2}-19].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-19 ):$V{paguina3}[$V{p3l2}-20].equals(" ")  ? $V{paguina3}.substring(  $V{lp6}, $V{p3l2}-20 ):"")]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="711" splitType="Stretch">
+			<textField pattern="">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="85" y="0" width="479" height="710" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" isBold="false" isStrikeThrough="false" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="-69" width="186" height="56"/>
+				<textElement textAlignment="Center" lineSpacing="Single" markup="html">
+					<font fontName="URWGothicL" size="13" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["<b><i>"+$F{abogado}+"</i></b><b><br>ABOGADO<br></b><b><i>"+$F{impreabogado}+"</i></b>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="-69" width="132" height="43"/>
+				<textElement>
+					<font fontName="URWGothicL" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contratostr_serie}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="711">
+			<textField>
+				<reportElement positionType="Float" x="52" y="0" width="476" height="419"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable2}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="52" y="419" width="476" height="292"/>
+				<subreportParameter name="NumeroContrato">
+					<subreportParameterExpression><![CDATA[$P{NumeroContrato}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "rpt_servicioscontratomecanizadofinal.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="695">
+			<textField>
+				<reportElement positionType="Float" x="84" y="0" width="479" height="695"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="655">
+			<textField>
+				<reportElement x="49" y="0" width="479" height="655"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable4}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="710">
+			<textField pattern="">
+				<reportElement x="84" y="0" width="479" height="710"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable5}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="710">
+			<textField>
+				<reportElement x="49" y="0" width="479" height="710"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable6}+" "+$V{variable7}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="711">
+			<textField>
+				<reportElement x="84" y="0" width="479" height="479"/>
+				<textElement textAlignment="Justified" lineSpacing="1_1_2" markup="html">
+					<font fontName="URWGothicL" size="13" pdfFontName="URW Gothic L Book" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable8}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="591" width="239" height="101"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="URWGothicL" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<b> CVA Compañia De Mecanizado Agricola y Transporte Pedro Camejo, S.A </b/>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="591" width="174" height="72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="URWGothicL" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<b>El Productor</b>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="96" y="577" width="239" height="1"/>
+			</line>
+			<line>
+				<reportElement x="363" y="578" width="201" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

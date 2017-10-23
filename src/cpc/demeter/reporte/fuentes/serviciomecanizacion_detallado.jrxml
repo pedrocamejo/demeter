@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="serviciomecanizacion_detallado" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.1384283767210617"/>
+	<property name="ireport.x" value="1552"/>
+	<property name="ireport.y" value="435"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("/home/erix/Imágenes/logopc.png")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaAño" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/erix/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FechaMes" class="java.lang.Integer"/>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="coleccionMecanizadoAgricola" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="fechaFin" class="java.lang.String"/>
+	<parameter name="sede" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cedulaRif" class="java.lang.String">
+		<fieldDescription><![CDATA[cedulaRif]]></fieldDescription>
+	</field>
+	<field name="descripcionMunicipio" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionMunicipio]]></fieldDescription>
+	</field>
+	<field name="descripcionRubro" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionRubro]]></fieldDescription>
+	</field>
+	<field name="descripcionLabor" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionLabor]]></fieldDescription>
+	</field>
+	<field name="descripcionUnidadMedida" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionUnidadMedida]]></fieldDescription>
+	</field>
+	<field name="nombresCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[nombresCliente]]></fieldDescription>
+	</field>
+	<field name="operadores" class="java.lang.String">
+		<fieldDescription><![CDATA[operadores]]></fieldDescription>
+	</field>
+	<field name="cantidalaborEjecutada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidalaborEjecutada]]></fieldDescription>
+	</field>
+	<field name="cantidaFisicoLaborada" class="java.lang.Double">
+		<fieldDescription><![CDATA[cantidaFisicoLaborada]]></fieldDescription>
+	</field>
+	<field name="montoBaseFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoBaseFacturado]]></fieldDescription>
+	</field>
+	<field name="montoTotalFacturado" class="java.lang.Double">
+		<fieldDescription><![CDATA[montoTotalFacturado]]></fieldDescription>
+	</field>
+	<field name="operadores_1" class="java.lang.String">
+		<fieldDescription><![CDATA[operadores]]></fieldDescription>
+	</field>
+	<field name="descripcionServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionServicio]]></fieldDescription>
+	</field>
+	<field name="nroControlfactura" class="java.lang.Long">
+		<fieldDescription><![CDATA[nroControlfactura]]></fieldDescription>
+	</field>
+	<sortField name="descripcionMunicipio"/>
+	<sortField name="cedulaRif"/>
+	<sortField name="descripcionServicio"/>
+	<sortField name="descripcionLabor"/>
+	<variable name="pases" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}/$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_montoTotalFacturado_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoTotalFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_cantidaFisicoLaborada_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_cantidalaborEjecutada_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_pases_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{pases}]]></variableExpression>
+	</variable>
+	<variable name="SUM_PASES_X_SERVICIO" class="java.lang.Double" resetType="Group" resetGroup="Servicios" calculation="Sum">
+		<variableExpression><![CDATA[$V{pases}]]></variableExpression>
+	</variable>
+	<variable name="SUM_PASES_X_PRODUCTOR" class="java.lang.Double" resetType="Group" resetGroup="Productores" calculation="Sum">
+		<variableExpression><![CDATA[$V{pases}]]></variableExpression>
+	</variable>
+	<variable name="SUM_PASES_X_MUNICIPIO" class="java.lang.Double" resetType="Group" resetGroup="Municipios" calculation="Sum">
+		<variableExpression><![CDATA[$V{pases}]]></variableExpression>
+	</variable>
+	<variable name="SUM_HL_X_SERVICIO" class="java.lang.Double" resetType="Group" resetGroup="Servicios" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_HL_X_PRODUCTOR" class="java.lang.Double" resetType="Group" resetGroup="Productores" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_HL_X_MUNICIPIO" class="java.lang.Double" resetType="Group" resetGroup="Municipios" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidalaborEjecutada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_FL_X_SERVICIO" class="java.lang.Double" resetType="Group" resetGroup="Servicios" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_FL_X_PRODUCTOR" class="java.lang.Double" resetType="Group" resetGroup="Productores" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_FL_X_MUNICIPIO" class="java.lang.Double" resetType="Group" resetGroup="Municipios" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidaFisicoLaborada}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOBASE_X_SERVICIO" class="java.lang.Double" resetType="Group" resetGroup="Servicios" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoBaseFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOBASE_X_PRODUCTOR" class="java.lang.Double" resetType="Group" resetGroup="Productores" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoBaseFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOBASE_X_MUNICIPIO" class="java.lang.Double" resetType="Group" resetGroup="Municipios" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoBaseFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOTOTAL_X_SERVICIO" class="java.lang.Double" resetType="Group" resetGroup="Servicios" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoTotalFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOTOTAL_X_PRODUCTOR" class="java.lang.Double" resetType="Group" resetGroup="Productores" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoTotalFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_MONTOTOTAL_X_MUNICIPIO" class="java.lang.Double" resetType="Group" resetGroup="Municipios" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoTotalFacturado}]]></variableExpression>
+	</variable>
+	<variable name="SUM_montoBaseFacturado" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{montoBaseFacturado}]]></variableExpression>
+	</variable>
+	<variable name="COUNT_PORDUCTORES_X_MUNICIPIO" class="java.lang.Integer" resetType="Group" resetGroup="Municipios" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{cedulaRif}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Municipios">
+		<groupExpression><![CDATA[$F{descripcionMunicipio}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" mode="Opaque" x="23" y="4" width="747" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<textElement verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Municipio: " + $F{descripcionMunicipio}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="23">
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="437" y="9" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_PASES_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="241" y="9" width="110" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[SUBTOTAL MUNICIPIO:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="246" y="7" width="524" height="2"/>
+				</line>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="398" y="9" width="39" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_HL_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="477" y="9" width="43" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_FL_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="675" y="10" width="38" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOBASE_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="713" y="10" width="57" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOTOTAL_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" mode="Opaque" x="23" y="6" width="218" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<textElement verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Productores por Municipio: " + $V{COUNT_PORDUCTORES_X_MUNICIPIO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Productores">
+		<groupExpression><![CDATA[$F{cedulaRif}]]></groupExpression>
+		<groupHeader>
+			<band height="12">
+				<staticText>
+					<reportElement mode="Opaque" x="23" y="0" width="55" height="12" backcolor="#F9E9D9"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Productor:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" mode="Opaque" x="78" y="0" width="178" height="12" forecolor="#A9510E" backcolor="#F9E9D9"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombresCliente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="256" y="0" width="55" height="12" backcolor="#F9E9D9"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cédula/RIF:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" mode="Opaque" x="310" y="0" width="460" height="12" forecolor="#A9510E" backcolor="#F9E9D9"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cedulaRif}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="437" y="3" width="40" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_PASES_X_PRODUCTOR}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="254" y="3" width="97" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[Subtotal Productor:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="246" y="1" width="524" height="2"/>
+				</line>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="398" y="3" width="39" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_HL_X_PRODUCTOR}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="477" y="3" width="43" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_FL_X_PRODUCTOR}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="675" y="3" width="38" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOBASE_X_PRODUCTOR}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="713" y="3" width="57" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOTOTAL_X_PRODUCTOR}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Servicios">
+		<groupExpression><![CDATA[$F{descripcionServicio}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="437" y="3" width="40" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_PASES_X_SERVICIO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="254" y="3" width="97" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Subtotal Servicio:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="246" y="1" width="524" height="1"/>
+				</line>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="398" y="3" width="39" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_HL_X_SERVICIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="477" y="3" width="43" height="12"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_FL_X_SERVICIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="675" y="3" width="38" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOBASE_X_SERVICIO}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+					<reportElement x="713" y="3" width="57" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_MONTOTOTAL_X_SERVICIO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<image>
+				<reportElement key="image-1" x="0" y="0" width="750" height="60"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="23" y="3" width="747" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Servicios de Mecanización Detallados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="397" y="42" width="40" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hectareas Laboradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="437" y="42" width="40" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pases]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="477" y="42" width="43" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hectareas Físicas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="258" y="42" width="54" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio Prestado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="675" y="42" width="38" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Monto Base]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="713" y="42" width="57" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total (Bs.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="520" y="42" width="90" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Operador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="610" y="42" width="65" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro de Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="312" y="42" width="85" height="22" forecolor="#154F15" backcolor="#DCE7E9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rubro]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="staticText-1" x="489" y="23" width="283" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Desde: " + $P{fecha} + "   " + "Hasta: " + $P{fechaFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="staticText-1" x="23" y="23" width="283" height="20"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sede: " + $P{sede}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="314" y="0" width="85" height="12"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionRubro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="398" y="0" width="39" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidalaborEjecutada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="437" y="0" width="40" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pases}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="477" y="0" width="43" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidaFisicoLaborada}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="675" y="0" width="38" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoBaseFacturado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement key="textField" x="713" y="0" width="57" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{montoTotalFacturado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="520" y="0" width="90" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{operadores}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="610" y="0" width="65" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{nroControlfactura} == null ? "N/A" : $F{nroControlfactura} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" mode="Transparent" x="258" y="0" width="54" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionServicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="53" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="620" y="15" width="100" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField" x="721" y="15" width="50" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="23" y="24" width="288" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Impreso por : "+$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="23" y="14" width="288" height="10"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="500" splitType="Stretch">
+			<subreport>
+				<reportElement x="23" y="13" width="747" height="110"/>
+				<subreportParameter name="logo">
+					<subreportParameterExpression><![CDATA[$P{logo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FechaAño">
+					<subreportParameterExpression><![CDATA[$P{FechaAño}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FechaMes">
+					<subreportParameterExpression><![CDATA[$P{FechaMes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="usuario">
+					<subreportParameterExpression><![CDATA[$P{usuario}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{coleccionMecanizadoAgricola}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "serviciomecanizacion_detallado_subreporte.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

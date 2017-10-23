@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="rutaMecanizado"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="552"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<field name="nombreCompletoImplemento" class="java.lang.String">
+		<fieldDescription><![CDATA[implemento.nombreCompleto]]></fieldDescription>
+	</field>
+	<field name="nombreCompletoMaquinaria" class="java.lang.String">
+		<fieldDescription><![CDATA[maquinaria.nombreCompleto]]></fieldDescription>
+	</field>
+	<field name="nombreOperador" class="java.lang.String">
+		<fieldDescription><![CDATA[operador.nombre]]></fieldDescription>
+	</field>
+	<field name="serialEquipo" class="java.lang.String">
+		<fieldDescription><![CDATA[maquinaria.serial]]></fieldDescription>
+	</field>
+	<field name="nroControl" class="java.lang.String">
+		<fieldDescription><![CDATA[ordenTrabajo.nroControl]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[ordenTrabajo.fecha]]></fieldDescription>
+	</field>
+	<field name="strUnidadFuncional" class="java.lang.String">
+		<fieldDescription><![CDATA[ordenTrabajo.strUnidadFuncional]]></fieldDescription>
+	</field>
+
+	<sortField name="nombreOperador" />
+	<sortField name="serialEquipo" />
+	<sortField name="nroControl" />
+
+
+		<group  name="Operador" isStartNewPage="true" >
+			<groupExpression><![CDATA[$F{nombreOperador}]]></groupExpression>
+			<groupHeader>
+			<band height="112"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="6"
+						y="9"
+						width="56"
+						height="14"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Operador:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="23"
+						width="92"
+						height="14"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Hora de Salida:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="37"
+						width="123"
+						height="14"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Horometro de Salida:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="51"
+						width="56"
+						height="14"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Labor:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="65"
+						width="104"
+						height="14"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Serial Equipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="79"
+						width="104"
+						height="14"
+						key="staticText-6"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Direccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="6"
+						y="93"
+						width="104"
+						height="14"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Consejo Comunal:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="366"
+						y="9"
+						width="56"
+						height="14"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="366"
+						y="23"
+						width="92"
+						height="14"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Hora de llegada:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="366"
+						y="37"
+						width="123"
+						height="14"
+						key="staticText-10"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Horometro de llegada:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="366"
+						y="51"
+						width="104"
+						height="14"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Implemento:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="366"
+						y="93"
+						width="140"
+						height="14"
+						key="staticText-14"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Llenado de combustible (I):]]></text>
+				</staticText>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="1"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="3"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="3"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="57"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

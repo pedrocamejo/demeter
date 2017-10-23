@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Serviciosaprestar" language="groovy" pageWidth="496" pageHeight="907" columnWidth="496" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000082"/>
+	<property name="ireport.x" value="14"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NumeroContrato" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+administracion.tbl_dem_detallecontrato.seq_iddetalle ,
+administracion.tbl_dem_detallecontrato.int_idcontrato,
+trunc(administracion.tbl_dem_detallecontrato.dbl_cantidad,2) as cantidad,
+trunc(administracion.tbl_dem_detallecontrato.dbl_preciounidad,2) as preciounidad,
+trunc(administracion.tbl_dem_detallecontrato.dbl_subtotal,2) as subtotal,
+public.tbl_dem_unidad_medidas.str_descripcion as unidaddescripcion,
+public.tbl_dem_unidad_medidas.str_abreviatura as unidadabreviada,
+public.tbl_dem_unidad_medidas.bol_compuesto as unidadcompuesta,
+basico.tbl_dem_producto.str_descripcion as STR_NOMSERV,
+undcobro.str_descripcion as undcobro,
+undcobro.str_abreviatura as abrundcobro,
+undlabor.str_descripcion as undlabor,
+undcobro.str_abreviatura as abrundlabor
+
+FROM administracion.tbl_dem_detallecontrato
+LEFT JOIN public.tbl_dem_unidad_medidas on public.tbl_dem_unidad_medidas.int_idtipounidadmedida=administracion.tbl_dem_detallecontrato.int_idumedidacobro
+LEFT JOIN basico.tbl_dem_producto on basico.tbl_dem_producto.seq_idproducto=administracion.tbl_dem_detallecontrato.int_idproducto
+LEFT JOIN basico.tbl_dem_labor on basico.tbl_dem_labor.int_idproducto = basico.tbl_dem_producto.seq_idproducto
+LEFT JOIN public.tbl_dem_unidad_medidas  undcobro ON undcobro.seq_idumedida =  basico.tbl_dem_labor.int_idumedidaprecio
+LEFT JOIN public.tbl_dem_unidad_medidas  undlabor ON undlabor.seq_idumedida =  basico.tbl_dem_labor.int_idumedidalabor
+WHERE administracion.tbl_dem_detallecontrato.int_idcontrato =$P{NumeroContrato}]]>
+	</queryString>
+	<field name="seq_iddetalle" class="java.lang.Long"/>
+	<field name="int_idcontrato" class="java.lang.Integer"/>
+	<field name="cantidad" class="java.math.BigDecimal"/>
+	<field name="preciounidad" class="java.math.BigDecimal"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="unidaddescripcion" class="java.lang.String"/>
+	<field name="unidadabreviada" class="java.lang.String"/>
+	<field name="unidadcompuesta" class="java.lang.Boolean"/>
+	<field name="str_nomserv" class="java.lang.String"/>
+	<field name="undcobro" class="java.lang.String"/>
+	<field name="abrundcobro" class="java.lang.String"/>
+	<field name="undlabor" class="java.lang.String"/>
+	<field name="abrundlabor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="1" y="19" width="495" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["ANEXO A - SERVICIOS CONTRATADOS"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="386" y="46" width="109" height="20" forecolor="#FEFEFE" backcolor="#96060D"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="274" y="46" width="112" height="20" forecolor="#FEFEFE" backcolor="#96060D"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="184" y="46" width="90" height="20" forecolor="#FEFEFE" backcolor="#96060D"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="46" width="184" height="20" forecolor="#FEFEFE" backcolor="#96060D"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="274" y="0" width="112" height="25"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{preciounidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="386" y="0" width="109" height="25"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="184" y="0" width="90" height="25"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("#,##0.00").format($F{cantidad})+" "+$F{abrundcobro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="184" height="25"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Monospaced" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{str_nomserv}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

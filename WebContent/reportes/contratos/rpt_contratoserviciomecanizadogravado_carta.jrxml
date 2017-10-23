@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gravado" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="28" bottomMargin="21">
+	<property name="ireport.zoom" value="1.0000000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1349"/>
+	<parameter name="NumeroContrato" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/imedina/eworkspace/icaro/src/reportes/fuentes/demeter/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Sede" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+  int_idcontrato,
+  int_idunidadproductiva,
+  int_idsolicitudmecanizado,
+  rpad (substring (administracion.tbl_dem_estado_contrato.str_descripcion from 0 for 20),20,'-') AS estadocontrato,
+  to_char(administracion.tbl_dem_contrato.dtm_fecha, 'dd-mm-yyyy') AS contratodtm_fecha,
+  to_char(administracion.tbl_dem_contrato.dtm_fechadesde,'dd-mm-yyyy') AS contratofechadesde,
+  administracion.tbl_dem_contrato.dtm_fechadesde,
+  administracion.tbl_dem_contrato.dtm_fechadesde + tbl_dem_contrato.int_diasvigencia as fechahasta,
+
+  to_char(administracion.tbl_dem_contrato.dtm_fechadesde + tbl_dem_contrato.int_diasvigencia,'dd-mm-yyyy') AS    contratofechahasta,
+  tbl_dem_contrato.int_idtipocontrato AS tipocontrato,
+  tbl_dem_contrato.int_diasvigencia AS contratodiasvigencia,
+  trunc(administracion.tbl_dem_contrato.dbl_monto,2) AS contratomonto,
+
+  rpad (substring (fu_numero_letras(administracion.tbl_dem_contrato.dbl_monto) from 0 for 100),100,'- ') AS letrasmonto,
+  administracion.tbl_dem_contrato.str_serie AS contratostr_serie,
+
+  rpad (substring (tbl_dem_clientes.str_nombre from 0 for 40),40,'-') AS nombrepagador,
+  tbl_dem_clientes.str_cedurif  AS cedurifpagador,
+
+  rpad (substring (tbl_dem_plan_financiamiento.str_descripcion from 0 for 30),30,'-') AS plan_financiamiento_str_descripcion,
+  tbl_dem_plan_financiamiento.bol_objetoventa AS plan_financiamiento_bol_objetoventa,
+  tbl_dem_plan_financiamiento.dtm_fecha AS plan_financiamiento_dtm_fecha,
+  tbl_dem_plan_financiamiento.dbl_porcdesc AS plan_financiamiento_dbl_porcdesc,
+
+  rpad (substring (fu_numero_letras(trunc((administracion.tbl_dem_contrato.dbl_monto*(tbl_dem_plan_financiamiento.dbl_porcinic/100)),2)) from 0 for 100),100,'- ') as letrasinicial,
+  trunc((administracion.tbl_dem_contrato.dbl_monto*(tbl_dem_plan_financiamiento.dbl_porcinic/100)),2) as inicial,
+  tbl_dem_plan_financiamiento.dbl_porcinic AS plan_financiamiento_dbl_porcinic,
+
+  rpad (substring (fu_numero_letras(  (administracion.tbl_dem_contrato.dbl_monto)-(administracion.tbl_dem_contrato.dbl_monto*(tbl_dem_plan_financiamiento.dbl_porcinic/100)) )from 0 for 100),100,'- ') as letrasculminacion,
+  trunc((administracion.tbl_dem_contrato.dbl_monto-(administracion.tbl_dem_contrato.dbl_monto*(tbl_dem_plan_financiamiento.dbl_porcinic/100))),2) as culminacion,
+    rpad (substring (tbl_dem_tipocontrato.str_nombre from 0 for 60),60,'-') as tipocontrato_str_nombre,
+  rpad (substring (tbl_dem_tipocontrato.str_clausula from 0 for 20),20,'-') AS dem_tipocontrato_str_clausula,
+
+control_sede.str_abogado AS abogado,
+control_sede.str_impreabogado AS impreabogado,
+rpad (substring (control_sede.str_direccionsede from 0 for 100),100,'- ') AS direccionsede,
+rpad (substring (control_sede.str_coordinadorsede from 0 for 50),50,'- ') AS coordinadorsede,
+control_sede.str_sede AS str_sede,
+control_sede.str_codemp AS str_codemp,
+
+rpad (substring (tbl_dem_productor.str_nombre from 0 for 40),40,'- ') as nombreproductor,
+tbl_dem_productor.str_cedurif  AS cedurifproductor,
+
+rpad (estado.str_descripcion,20,'-') AS estadocliente,
+rpad (municipio.str_descripcion,20,'-') AS municipiocliente,
+rpad (parroquia.str_descripcion,20,'-') AS parroquiacliente,
+rpad (sector.str_descripcion,20,'-') AS direccionsectorcliente,
+rpad (substring (tbl_dem_direccion.str_referencia from 0 for 120),120,'- ') AS direccionptoreferenciacliente,
+rpad ((sector.str_descripcion ||', PARROQUIA ' || parroquia.str_descripcion || ', MUNICIPIO '||municipio.str_descripcion || ', ESTADO ' || estado.str_descripcion ),110,'- ') AS direccioncompleta ,
+
+
+control_sede.str_cedulacoordinadorsede AS cedulacoordinadorsede,
+
+rpad (estado.str_descripcion,20,'-') AS estadoproduccion,
+rpad (municipio.str_descripcion,20,'-') AS municipioproduccion,
+rpad (parroquia.str_descripcion,20,'-') AS parroquiaproduccion,
+rpad (tbl_dem_direccion.str_referencia,120,'-') AS direccionptoreferenciaproduccion,
+rpad (sector.str_descripcion,30,'-') AS direccionsectorproduccion,
+
+administracion.tbl_dem_contrato.int_diasvigencia AS diasvigencia,
+fu_numero_letras_entero(administracion.tbl_dem_contrato.int_diasvigencia) as letrasdiasvigencia,
+FLOOR(date_part('day',administracion.tbl_dem_contrato.dtm_fechadesde )) as diafirma,
+FLOOR (date_part('month',administracion.tbl_dem_contrato.dtm_fechadesde)) as mesfirma,
+FLOOR (date_part('year',administracion.tbl_dem_contrato.dtm_fechadesde )) as anyofirma,
+FLOOR (date_part('day',administracion.tbl_dem_contrato.dtm_fecha)) as diaculminacion,
+FLOOR (date_part('month',administracion.tbl_dem_contrato.dtm_fecha)) as mesculminacion
+
+
+  FROM administracion.tbl_dem_contratomecanizado
+  LEFT JOIN administracion.tbl_dem_contrato ON administracion.tbl_dem_contratomecanizado.int_idcontrato = administracion.tbl_dem_contrato.seq_idcontrato
+  LEFT JOIN administracion.tbl_dem_estado_contrato ON tbl_dem_estado_contrato.seq_idestadocontrato = tbl_dem_contrato.int_estado
+  LEFT JOIN administracion.tbl_dem_plan_financiamiento tbl_dem_plan_financiamiento ON tbl_dem_contrato.int_idplanfinanciamiento = tbl_dem_plan_financiamiento.seq_idplanfinanciamiento
+  LEFT JOIN administracion.tbl_dem_tipocontrato tbl_dem_tipocontrato ON tbl_dem_contrato.int_idtipocontrato = tbl_dem_tipocontrato.seq_idtipocontrato
+  LEFT JOIN gestion.tbl_dem_solicitud ON gestion.tbl_dem_solicitud.seq_idsolicitud = administracion.tbl_dem_contratomecanizado.int_idsolicitudmecanizado
+
+  LEFT JOIN administracion.tbl_dem_control_sede control_sede ON control_sede.seq_control = 1
+
+  LEFT JOIN ministerio.tbl_dem_unidadproductiva tbl_dem_unidadproductiva ON tbl_dem_unidadproductiva.seq_idunidadproductiva = int_idunidadproductiva
+  LEFT JOIN public.tbl_dem_clientes tbl_dem_productor ON tbl_dem_productor.seq_idcliente = tbl_dem_unidadproductiva.int_idproductor
+  LEFT JOIN public.tbl_dem_clientes tbl_dem_clientes ON tbl_dem_contrato.int_idpagador = tbl_dem_clientes.seq_idcliente
+
+  LEFT JOIN ministerio.tbl_dem_direccion tbl_dem_direccion ON tbl_dem_direccion.seq_iddireccion = tbl_dem_unidadproductiva.int_iddireccion
+
+  LEFT JOIN ministerio.tbl_dem_sector sector ON sector.seq_idsector = tbl_dem_direccion.int_idsector
+  LEFT JOIN ministerio.tbl_dem_parroquia parroquia ON parroquia.seq_idparroquia = sector.int_idparroquia
+  LEFT JOIN ministerio.tbl_dem_municipio municipio ON municipio.seq_idmunicipio = parroquia.int_idmunicipio
+  LEFT JOIN ministerio.tbl_dem_estado estado ON estado.seq_idestado = municipio.int_idestado
+where  int_idcontrato= $P{NumeroContrato}]]>
+	</queryString>
+	<field name="int_idcontrato" class="java.lang.Integer"/>
+	<field name="int_idunidadproductiva" class="java.lang.Integer"/>
+	<field name="int_idsolicitudmecanizado" class="java.lang.Integer"/>
+	<field name="estadocontrato" class="java.lang.String"/>
+	<field name="contratodtm_fecha" class="java.lang.String"/>
+	<field name="contratofechadesde" class="java.lang.String"/>
+	<field name="dtm_fechadesde" class="java.sql.Date"/>
+	<field name="fechahasta" class="java.sql.Date"/>
+	<field name="contratofechahasta" class="java.lang.String"/>
+	<field name="tipocontrato" class="java.lang.Integer"/>
+	<field name="contratodiasvigencia" class="java.lang.Integer"/>
+	<field name="contratomonto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="letrasmonto" class="java.lang.String"/>
+	<field name="contratostr_serie" class="java.lang.String"/>
+	<field name="nombrepagador" class="java.lang.String"/>
+	<field name="cedurifpagador" class="java.lang.String"/>
+	<field name="plan_financiamiento_str_descripcion" class="java.lang.String"/>
+	<field name="plan_financiamiento_bol_objetoventa" class="java.lang.Boolean"/>
+	<field name="plan_financiamiento_dtm_fecha" class="java.sql.Date"/>
+	<field name="plan_financiamiento_dbl_porcdesc" class="java.lang.Double"/>
+	<field name="letrasinicial" class="java.lang.String"/>
+	<field name="inicial" class="java.lang.Double"/>
+	<field name="plan_financiamiento_dbl_porcinic" class="java.lang.Double"/>
+	<field name="letrasculminacion" class="java.lang.String"/>
+	<field name="culminacion" class="java.lang.Double"/>
+	<field name="tipocontrato_str_nombre" class="java.lang.String"/>
+	<field name="dem_tipocontrato_str_clausula" class="java.lang.String"/>
+	<field name="abogado" class="java.lang.String"/>
+	<field name="impreabogado" class="java.lang.String"/>
+	<field name="direccionsede" class="java.lang.String"/>
+	<field name="coordinadorsede" class="java.lang.String"/>
+	<field name="str_sede" class="java.lang.String"/>
+	<field name="str_codemp" class="java.lang.String"/>
+	<field name="nombreproductor" class="java.lang.String"/>
+	<field name="cedurifproductor" class="java.lang.String"/>
+	<field name="estadocliente" class="java.lang.String"/>
+	<field name="municipiocliente" class="java.lang.String"/>
+	<field name="parroquiacliente" class="java.lang.String"/>
+	<field name="direccionsectorcliente" class="java.lang.String"/>
+	<field name="direccionptoreferenciacliente" class="java.lang.String"/>
+	<field name="direccioncompleta" class="java.lang.String"/>
+	<field name="cedulacoordinadorsede" class="java.lang.String"/>
+	<field name="estadoproduccion" class="java.lang.String"/>
+	<field name="municipioproduccion" class="java.lang.String"/>
+	<field name="parroquiaproduccion" class="java.lang.String"/>
+	<field name="direccionptoreferenciaproduccion" class="java.lang.String"/>
+	<field name="direccionsectorproduccion" class="java.lang.String"/>
+	<field name="diasvigencia" class="java.lang.Integer"/>
+	<field name="letrasdiasvigencia" class="java.lang.String"/>
+	<field name="diafirma" class="java.lang.Double"/>
+	<field name="mesfirma" class="java.lang.Double"/>
+	<field name="anyofirma" class="java.lang.Double"/>
+	<field name="diaculminacion" class="java.lang.Double"/>
+	<field name="mesculminacion" class="java.lang.Double"/>
+	<variable name="pagina" class="java.lang.String">
+		<variableExpression><![CDATA["Entre la Empresa  Socialista <b>“CVA COMPAÑÍA DE MECANIZADO AGRICOLA Y TRANSPORTE PEDRO CAMEJO, S.A.”</b> inscrita ante  el Registro Mercantil Segundo de la Circunscripción Judicial del Estado Lara en fecha 28 de agosto de 2007, anotado bajo el Nº 50, del Tomo 80-A, publicado en Gaceta Oficial Nº 38.761 del 4 de septiembre de 2007, representada en este acto por el Coordinador Regional de la sucursal ubicada en <b><u>"+ $F{direccionsede}+"</u></b>, ciudadano <b><u>"+$F{coordinadorsede}+"</u></b>; venezolano, portador de la cédula de identidad Nº<b><u> "+$F{cedulacoordinadorsede}
++"</u></b>, por delegación del Directorio de CVA Compañía de Mecanizado Agrícola y Transporte Pedro Camejo, S.A., en lo sucesivo <b>“LA EMPRESA”</b>, por un lado; y, por el otro, el ciudadano<b><u> "+$F{nombreproductor}+"</u></b>, portador de la cédula de identidad Nº <b><u> "+$F{cedurifproductor}+"</u></b>, residenciado en <b><u> "
++$F{direccioncompleta}+"</u></b>, quien a los efectos de este contrato se denominará <b>“EL PRODUCTOR”</b>,"+
+" se ha convenido en celebrar un <b>CONTRATO DE SERVICIOS DE MECANIZACIÓN AGRÍCOLA</b>, en atención a  alguna de las siguientes  modalidades:<br>"
++"<b>CONDICIONES PARTICULARES:</b><br>"
++"(<b>"+""+"</b>)<b>a) SERVICIO GRAVADO:</b><b>“EL PRODUCTOR”</b> cancelará a <b>“LA EMPRESA”</b> la cantidad de <b><u>"+$F{letrasmonto}+"</u></b>  <b><u>(Bs."+$F{contratomonto}.toString( $F{contratomonto})+")</u></b>, de la siguiente manera: "
++" La cantidad de <b><u>"+$F{letrasinicial}+"</u></b> <b><u>(Bs."+$F{inicial}.toString($F{inicial} )+")</u></b> como anticipo con la firma del Contrato de Servicio "
++"y la cantidad de <b><u>"+$F{letrasculminacion}+"</u></b><b><u>(Bs."+$F{culminacion}.toString($F{culminacion})+")</u></b> al culminar la prestación del servicio objeto del presente contrato."
++" El precio indicado en este literal solo incluye el servicio de mecanización agrícola a través de las maquinarias propiedad de “LA EMPRESA”  en el sitio donde se prestará el servicio."+
+"<br><b>PARÁGRAFO ÚNICO:</b> A los efectos de la condición anterior, “EL PRODUCTOR” se compromete a cancelar el trabajo ejecutado por el personal que a su cargo se dedique a cargar y descargar los"
++" rubros agrícolas o cosechas objeto del presente contrato; y todo lo relativo a los operadores de las maquinarias utilizadas para cumplir con el objeto del presente contrato será por cuenta exclusiva de “LA EMPRESA”. En este orden de ideas; el control de la gestión administrativa de los pagos a realizarse hacia <b>“LA EMPRESA”</b> será llevado por ésta a través de la relación que para tal fin se efectúe. Los montos indicados han sido fijados por la Corporación "
++"Venezolana Agraria según Punto de Cuenta al Ciudadano Ministro <b>Nº 0627</b>, de fecha <b>15/10/08</b>. Los montos han sido establecidos como <b>TABLA DE COSTOS DE LOS SERVICIOS DE MECANIZACIÓN AGRÍCOLA Y TRANSPORTE PRESTADOS POR LA EMPRESA SOCIALISTA CVA COMPAÑÍA DE MECANIZADO AGRÍCOLA Y TRANSPORTE PEDRO CAMEJO, S.A."
++"Y QUE NO SE ENCUENTRAN FIJADOS EN GACETA OFICIAL DE LA REPÚBLICA BOLIVARIANA DE VENEZUELA.</b>"]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.String" calculation="Count">
+		<variableExpression><![CDATA[$V{pagina}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.String">
+		<variableExpression><![CDATA["<br><b>CONDICIONES GENERALES</b>" + "<br></br>" +"<br> <b>CLÁUSULA PRIMERA:</b> El objeto del presente contrato será la Prestación del Servicio de Mecanizado Agrícola y Transporte, incluyendo de ser el caso en concreto; los servicios estipulados en el anexo <b>“A”</b> por parte de <b>“LA EMPRESA”</b> hacia <b>“EL PRODUCTOR”</b> que para tal fin se establezcan.              <br> "+
+"<b>CLÁUSULA SEGUNDA:</b> Forman parte integrante del presente contrato  los  siguientes   documentos complementarios que se anexan firmados por las partes: <b>a)</b> Solicitud del Servicio de Mecanizado Agrícola y/o Transporte. <b>b)</b> Informe técnico del Consejo de Mecanización. <b>c)</b> Aprobación de la Exoneración. <b>d)</b> Contrato de Financiamiento. <b>e)</b> Informe de Condonación.<b> f)</b>Alteración del costo inicial del servicio.<b> g)</b> Relación de Cuentas pendientes, recibos y notas de créditos del presente contrato.<b> h)</b> Relación de Inventario de la Maquinaria."]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="pagina2" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.String">
+		<variableExpression><![CDATA["<br><br><br><b>CLÁUSULA TERCERA: “LA EMPRESA”, </b>prestará sus servicios de mecanización agrícola y/o transporte a “EL PRODUCTOR”  en una unidad de producción ubicada en <b><u>"+$F{direccioncompleta} +"</u></b> en el período comprendido entre el <b>"+$F{contratofechadesde}+"</b> y el <b>"+$F{contratofechahasta}+"</b>."+"<br><b> PARÁGRAFO ÚNICO: </b> Queda entendido que el Servicio acordado en este contrato, incluye el transporte de las maquinarias hasta el sitio donde se prestará el servicio y viceversa."  +"<br><b>CLÁUSULA CUARTA:</b> Para la prestación de los servicios objeto del presente contrato,<b>“LA EMPRESA”</b> empleará sus propias maquinarias y equipos identificados en el anexo <b>“g”</b> el cual forma parte integrante del presente contrato que serán operadas exclusivamente por el personal de <b>“LA EMPRESA”</b> contratado para tal fin." +"<br><b>PARÁGRAFO PRIMERO: </b>A los efectos de esta cláusula, <b>“EL PRODUCTOR”</b> se compromete durante esta etapa del servicio; no exceder el trabajo que realizarán los Operadores de Máquinas; siendo exclusiva potestad de <b>“LA EMPRESA”</b>, supervisar, dirigir y encomendar obligaciones al personal que presta el servicio bajo la dependencia de ella.<br>" +"<b>PARÁGRAFO SEGUNDO:</b> Así mismo; se compromete y obliga <b>“EL PRODUCTOR”</b> a resguardar, proteger y salvaguardar los bienes de <b>“LA EMPRESA”</b> que serán suministrados por esta para el servicio de mecanizado agrícola y transporte; por lo que será de su única y exclusiva responsabilidad todo aquel daño y perjuicio que sean ocasionados a dichos bienes.             " +"<br><b>CLÁUSULA QUINTA:</b> Previamente al inicio de la prestación del servicio de mecanizado, <b>“EL PRODUCTOR”</b> estará sujeto a una evaluación y estudio técnico de campo con las maquinarias requeridas para tal fin; a los efectos de verificar y establecer con precisión, el objeto del servicio en cuanto a implementos y maquinarias a utilizar; así como el área de terreno a cosechar. Este informe técnico formará parte integrante del presente contrato y determinará la aprobación o no del financiamiento que pueda ser solicitado por <b>“EL PRODUCTOR”</b>, así como la forma de pago a ejecutarse."   +"<br><b>CLÁUSULA SEXTA:</b> A los efectos de la protección y seguridad ambientales,<b>“LA EMPRESA”</b> se reserva el derecho de la no aplicación de los agroquímicos que componen la docena sucia, con fines de prevenir riesgos ambientales y laborales. Así mismo;  <b>“LA EMPRESA”</b> restringirá la aplicación de agrotóxicos de clasificación Roja." +"En este sentido; se establecen las siguientes obligaciones para <b>“EL PRODUCTOR”</b> <b>a)</b> Asegurar el agua suficiente para el lavado de las maquinarias al haber usado agroquímicos; <b>b)</b> Realizar la dosificación indicada por cada producto; <b>c)</b> Preparar las mezclas respetando las indicaciones de la etiqueta; <b>d)</b> No realizar cocteles; y, <b>e)</b> Respetar de manera estricta los intervalos establecidos por el fabricante, y señalados en la etiqueta de los plaguicidas entre el tratamiento del cultivo y la reentrada al mismo. En caso de no indicarse se deben dejar pasar al menos veinticuatro (24) horas contados desde la última aplicación antes de reingresar al área tratada."]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="variable4" class="java.lang.String">
+		<variableExpression><![CDATA["<br><br><br><b>CLÁUSULA SÉPTIMA:</b> Cuando el equipo suministrado tenga que permanecer en la unidad de producción de <b>“EL PRODUCTOR”</b>, este se obliga a su resguardo, custodia y vigilancia prestando para ello la diligencia y eficiencia de un buen padre de familia, toda vez que en caso de daño, deterioro o pérdida causada a los equipos suministrados será responsabilidad de <b> “EL PRODUCTOR” </b> .   "
++"<br><b>CLÁUSULA OCTAVA:</b> Si por hechos imputables o no a <b>“EL PRODUCTOR”</b> se produjeran circunstancias que no permitan cumplir con lo establecido en el contrato de servicios; éste podrá solicitar el financiamiento especial fundamentando dichas circunstancias y el Consejo de Mecanización decidirá al tercer (3er) día siguiente a dicha solicitud. A manera enunciativa más no taxativa, tenemos los siguientes hechos:"
++"<b>a)</b>Pérdida de la cosecha o producción por hechos de la naturaleza como lluvias, plagas, entre otros." +"<b>b)</b> Que el terreno sobre el cual se está ejecutando el servicio de mecanización y/o transporte, no haya podido ser explotado en su totalidad por no estar dadas las condiciones naturales (subsuelo no apto cuando se esté en proceso de arado o limpieza) del mismo." +"<br><b>c)</b>Que haya habido extralimitación por parte de “EL PRODUCTOR” en cuanto a la extensión de terreno a trabajar.          " +"<b>d)</b>Que las maquinarias asignadas para la prestación del servicio hayan presentado fallas o daños que generen cambios que ameriten su reparación inmediata y por tal razón, la paralización del servicio." +"<br><b>CLÁUSULA NOVENA:</b> <b>“LA EMPRESA”</b>, se reserva expresamente el derecho de rescindir el presente contrato en cualquier momento y mediante simple notificación por escrito, por las siguientes causas:" +"<br><b>1.</b>Cuando <b>“EL PRODUCTOR”</b>, sugiera que <b>“LA EMPRESA”</b>, realice trabajos contraviniendo las disposiciones del presente contrato o cuando pretenda que realice una cantidad de trabajo que no corresponda al tiempo invertido en la misma, de manera que ello no permita la conclusión del trabajo en el plazo estipulado." +"<br><b>2.</b>Cuando <b>“EL PRODUCTOR”</b>, sin previo conocimiento, aprobación y autorización dada por escrita por <b>“LA EMPRESA”</b>, subcontrate, ceda o traspase este contrato en todo o en parte." +"<br><b>3.</b>Por la interrupción injustificada de los SERVICIOS DE MECANIZACION por más de CINCO (05) días continuos. " +"<br><b>4.</b>Cuando <b>“EL PRODUCTOR”</b> incumpliere en la forma de pago convenida en el presente contrato; exceptuando aquellos casos en los cuales se ha solicitado un plan de financiamiento y haya sido debidamente aprobado por <b>“LA EMPRESA”</b>. Sin perjuicio que <b>“LA EMPRESA”</b> pueda ejercer las acciones correspondientes una vez que <b>“EL PRODUCTOR”</b> tampoco cumpla con lo pautado en ese nuevo financiamiento especial.        "
++"<br><b>CLÁUSULA DÉCIMA:</b> De producirse lo regulado en el numeral cuatro (4) de la Cláusula Sexta de este contrato; se establecerá un procedimiento para que <b>“EL PRODUCTOR”</b> pueda previa solicitud y aprobación de <b>“LA EMPRESA”</b>, ser financiado en el servicio de mecanizado agrícola y transporte; para lo que deberá cumplir con la formalización de la solicitud de financiamiento; así como de todos los recaudos exigidos por <b>“LA EMPRESA”</b>."
+]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.String">
+		<variableExpression><![CDATA["<br><br><br>Igualmente; cuando por causas no imputables a <b>“EL PRODUCTOR”</b>, sea necesario el refinanciamiento o la condonación de una" +" deuda existente, será el Comité de Mecanización quien determine la procedencia o no de este tipo de solicitudes fijando el procedimiento idóneo para que se materialice."
++"<br><b>CLÁUSULA DÉCIMA PRIMERA:</b> Todo financiamiento especial, alteración del costo originario del contrato o cualquiera condición que modifique a este, deberá suscribirse entre <b>“LA EMPRESA”</b> y <b>“EL PRODUCTOR”</b> mediante documento elaborado o Addéndum para tal fin formando parte integrante del contrato."
++"<br><b>CLÁUSULA DÉCIMA SEGUNDA:</b> <b>“EL PRODUCTOR”</b> no podrá ceder o transferir en modo alguno, total ni parcialmente el servicio objeto de este contrato, siendo nulo y sin valor alguno cualquier acuerdo celebrado en contravención a la presente cláusula."
++"<br><b>CLÁUSULA DÉCIMA TERCERA:</b> Este contrato tendrá una vigencia de<b> "+$F{letrasdiasvigencia} +"</b> (<b>"+$F{diasvigencia}+"</b>) dias, contados a partir del "+new SimpleDateFormat(" dd ' de ' MMMM 'del año' yyyy", new Locale("ES")).format($F{dtm_fechadesde})+"</b> hasta el día "+new SimpleDateFormat(" dd ' de ' MMMM 'del año' yyyy", new Locale("ES")).format($F{fechahasta})+"."
++"<br><b>CLÁUSULA DÉCIMA CUARTA:</b> Regirán las disposiciones legales y vigentes aplicables en esta materia, en todo lo que no esté expresamente previsto en este contrato."
++"<br><b>CLÁUSULA DÉCIMA QUINTA:</b> Para todos los efectos de este contrato, así como de sus obligaciones derivadas y consecuencias, se elige como domicilio especial la ciudad de Barquisimeto, Estado Lara, a la jurisdicción de cuyos tribunales acuerdan someterse las partes." +"<br></br><br>Se hacen tres (03) ejemplares del mismo tenor y a un solo efecto. En <b>" + $P{Sede} +"</b>, a "+new SimpleDateFormat("'los' dd 'dias del mes de' MMMM 'del año' yyyy", new Locale("ES")).format($F{dtm_fechadesde})+"</b>.    "]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="742" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="71" y="73" width="470" height="669" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="12" isBold="false" isStrikeThrough="false" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="11" width="234" height="47"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="13" isBold="true" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contratostr_serie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="11" width="200" height="47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="DejaVu Sans" size="13" isBold="false" pdfFontName="Times-Roman" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b><br>ABOGADO<br></b><b><i>"+$F{impreabogado}+"</i></b>"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="742">
+			<subreport>
+				<reportElement x="41" y="330" width="496" height="364"/>
+				<subreportParameter name="NumeroContrato">
+					<subreportParameterExpression><![CDATA[$P{NumeroContrato}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rpt_servicioscontratomecanizadofinal.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement positionType="Float" x="50" y="72" width="469" height="258"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="12" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="793">
+			<textField>
+				<reportElement positionType="Float" x="72" y="75" width="469" height="718" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="12" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="793">
+			<textField>
+				<reportElement positionType="Float" x="50" y="70" width="469" height="723"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="12" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="792">
+			<textField pattern="">
+				<reportElement positionType="Float" x="71" y="68" width="469" height="631"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="12" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable5}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="344" y="731" width="201" height="50"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html">
+					<font fontName="DejaVu Sans" size="13" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[<b>El Productor</b>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="731" width="244" height="50"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Monospaced" size="13" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[<b> CVA Compañia De Mecanizado Agricola y Transporte Pedro Camejo, S.A </b/>]]></text>
+			</staticText>
+			<line>
+				<reportElement x="60" y="718" width="244" height="1"/>
+			</line>
+			<line>
+				<reportElement x="344" y="718" width="201" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

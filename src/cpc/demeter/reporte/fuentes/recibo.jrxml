@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recibo" pageWidth="612" pageHeight="395" orientation="Landscape" columnWidth="552" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.7715610000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="logo" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new String("/home/erix/Imágenes/logopc.png")]]></defaultValueExpression>
+	</parameter>
+	<field name="descripcionBanco" class="java.lang.String">
+		<fieldDescription><![CDATA[banco.descripcion]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.concepto]]></fieldDescription>
+	</field>
+	<field name="strNroDocumento" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.documento.strNroDocumento]]></fieldDescription>
+	</field>
+	<field name="strNroContrato" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.documento.strNroContrato]]></fieldDescription>
+	</field>
+	<field name="montoRecibo" class="java.lang.Double">
+		<fieldDescription><![CDATA[recibo.monto]]></fieldDescription>
+	</field>
+	<field name="strDocumento" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.strDocumento]]></fieldDescription>
+	</field>
+	<field name="strContrato" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.strContrato]]></fieldDescription>
+	</field>
+	<field name="strFactura" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.strFactura]]></fieldDescription>
+	</field>
+	<field name="strPagador" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.strPagador]]></fieldDescription>
+	</field>
+	<field name="descripcionTipoPago" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoFormaPago.descripcion]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.lang.Double">
+		<fieldDescription><![CDATA[monto]]></fieldDescription>
+	</field>
+	<field name="controlRecibo" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.control]]></fieldDescription>
+	</field>
+	<field name="idRecibo" class="java.lang.Long">
+		<fieldDescription><![CDATA[recibo.id]]></fieldDescription>
+	</field>
+	<field name="cuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[cuenta]]></fieldDescription>
+	</field>
+	<field name="documento" class="java.lang.String">
+		<fieldDescription><![CDATA[documento]]></fieldDescription>
+	</field>
+	<field name="fechaRecibo" class="java.util.Date">
+		<fieldDescription><![CDATA[recibo.fecha]]></fieldDescription>
+	</field>
+	<sortField name="idRecibo"/>
+	<sortField name="descripcionTipoPago"/>
+	<sortField name="descripcionBanco"/>
+	<variable name="totall_monto" class="java.lang.String" calculation="Sum"/>
+	<variable name="SUM_monto_1" class="java.lang.Double" resetType="Group" resetGroup="recibo" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<group name="recibo" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{idRecibo}]]></groupExpression>
+		<groupHeader>
+			<band height="69" splitType="Stretch">
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="90" y="31" width="222" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{strFactura}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="90" y="3" width="460" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{strPagador}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="72" y="-16" width="120" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{controlRecibo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="90" y="17" width="460" height="14"/>
+					<textElement>
+						<font isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{concepto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-1" x="0" y="17" width="90" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Concepto:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-2" x="0" y="3" width="90" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Pagador:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-3" x="0" y="31" width="90" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Factura:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-4" x="312" y="31" width="58" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Contrato:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-5" x="0" y="-16" width="72" height="14"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Nro Control:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-7" x="398" y="-16" width="50" height="14"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Fecha:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="370" y="31" width="180" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{strContrato}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-8" x="0" y="51" width="100" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-9" x="100" y="51" width="159" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Banco]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-10" x="370" y="51" width="100" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Documento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-11" x="260" y="51" width="110" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cuenta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-12" x="470" y="51" width="80" height="14"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Monto]]></text>
+				</staticText>
+				<line>
+					<reportElement key="line-1" x="0" y="66" width="550" height="1"/>
+				</line>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+					<reportElement key="textField" x="448" y="-16" width="102" height="14"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{fechaRecibo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="3" splitType="Stretch">
+				<line>
+					<reportElement key="line-2" x="0" y="0" width="550" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="95" splitType="Stretch">
+			<image>
+				<reportElement key="image-1" x="0" y="0" width="552" height="60"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText-1" x="241" y="74" width="71" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Recibo]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-1" x="0" y="94" width="550" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="0" y="0" width="100" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionTipoPago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="468" y="0" width="81" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="101" y="0" width="155" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionBanco}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="259" y="0" width="110" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="99" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-6" x="370" y="0" width="98" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="##0.00" isBlankWhenNull="false">
+				<reportElement key="textField" x="468" y="0" width="82" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_monto_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

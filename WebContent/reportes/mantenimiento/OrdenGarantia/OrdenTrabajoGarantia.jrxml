@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenTrabajoGarantia" language="groovy" pageWidth="612" pageHeight="792" columnWidth="568" leftMargin="22" rightMargin="22" topMargin="27" bottomMargin="22">
+	<property name="ireport.zoom" value="1.24184264611831"/>
+	<property name="ireport.x" value="142"/>
+	<property name="ireport.y" value="238"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<queryString language="SQL">
+			<![CDATA[]]>
+		</queryString>
+		<field name="maquinaria.serialcarroceria" class="java.lang.String"/>
+		<filterExpression><![CDATA[$F{maquinaria.serialcarroceria}]]></filterExpression>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/rchirinos/Worskpace2/demeterSedes/WebContent/reportes/mantenimiento/OrdenGarantia/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cintillo" class="java.io.File"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="encargado" class="java.lang.String"/>
+	<field name="detalleGarantia.descripcion" class="java.lang.String"/>
+	<field name="maquinaria.serialcarroceria" class="java.lang.String"/>
+	<field name="maquinaria.serialMotor" class="java.lang.Object"/>
+	<field name="maquinaria.anofabricacion" class="java.lang.String"/>
+	<field name="maquinaria.localidad" class="java.lang.String"/>
+	<field name="maquinaria.propietariosDS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="actividadDS" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<field name="maquinaria.tipo.serie" class="java.lang.String"/>
+	<field name="maquinaria.tipo.colorPrimario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<image>
+				<reportElement x="49" y="1" width="513" height="50"/>
+				<imageExpression><![CDATA[$P{cintillo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="159" splitType="Stretch">
+			<staticText>
+				<reportElement x="179" y="0" width="214" height="15"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Orden de Trabajo Garantias ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="35" width="61" height="12"/>
+				<textElement/>
+				<text><![CDATA[Encargado :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="35" width="92" height="12"/>
+				<textElement/>
+				<text><![CDATA[Detalle Garantia :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="374" y="35" width="178" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalleGarantia.descripcion}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="179" y="15" width="186" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="17" y="55" width="136" height="15"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Maquinaria :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="70" width="551" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="28" y="82" width="92" height="12"/>
+				<textElement/>
+				<text><![CDATA[Serial Carroceria :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="82" width="193" height="12"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{maquinaria.serialcarroceria}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="339" y="82" width="70" height="12"/>
+				<textElement/>
+				<text><![CDATA[Serial Motor :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="409" y="82" width="163" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{maquinaria.serialMotor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="104" width="51" height="12"/>
+				<textElement/>
+				<text><![CDATA[N° Serie :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="104" width="90" height="12"/>
+				<textElement/>
+				<text><![CDATA[Año Fabricación :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="104" width="35" height="12"/>
+				<textElement/>
+				<text><![CDATA[Color :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="311" y="104" width="63" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{maquinaria.anofabricacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="35" width="99" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{encargado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="127" width="61" height="13"/>
+				<textElement/>
+				<text><![CDATA[Localidad :]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="89" y="127" width="463" height="28" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font isBold="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{maquinaria.localidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="3" width="81" height="13"/>
+				<textElement/>
+				<text><![CDATA[Orden Numero :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="503" y="3" width="59" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="104" width="128" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{maquinaria.tipo.serie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="104" width="143" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{maquinaria.tipo.colorPrimario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="288" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="171" width="182" height="14"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Actividades Planificadas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="22" y="185" width="540" height="1"/>
+			</line>
+			<subreport>
+				<reportElement x="11" y="31" width="551" height="129" isPrintWhenDetailOverflows="true"/>
+				<dataSourceExpression><![CDATA[$F{maquinaria.propietariosDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "DetallePropietario.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="11" y="186" width="551" height="91"/>
+				<dataSourceExpression><![CDATA[$F{actividadDS}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Actividades.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="11" y="30" width="551" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="15" width="136" height="15"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Propietario :]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="374" y="0" width="95" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orden Numero:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="469" y="0" width="93" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="112" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="29" width="62" height="15"/>
+				<textElement/>
+				<text><![CDATA[Horometro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="153" height="15"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos de la Actividad ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="29" width="91" height="15"/>
+				<textElement/>
+				<text><![CDATA[Fecha Actividad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="29" width="56" height="15"/>
+				<textElement/>
+				<text><![CDATA[Odometro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="103" width="98" height="9"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Firma Propietario]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="438" y="28" width="130" height="72"/>
+			</rectangle>
+			<line>
+				<reportElement x="94" y="40" width="60" height="1"/>
+			</line>
+			<line>
+				<reportElement x="234" y="41" width="79" height="1"/>
+			</line>
+			<line>
+				<reportElement x="365" y="42" width="73" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="39" y="60" width="39" height="17"/>
+				<textElement/>
+				<text><![CDATA[Nota :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="79" y="100" width="359" height="1"/>
+			</line>
+			<line>
+				<reportElement x="33" y="15" width="535" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

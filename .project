@@ -3,10 +3,10 @@
 	<name>demeterSedes</name>
 	<comment></comment>
 	<projects>
-		<project>aresBase</project>
 		<project>utilidades</project>
-		<project>modeloDemeter</project>
 		<project>zkui</project>
+		<project>aresbase</project>
+		<project>modelodemeter</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -1,5 +1,6 @@
 package cpc.demeter;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,5 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan("cpc.demeter")
 public class ConfiguracionProduccion {
 
-	
+	@Bean
+	public String showSql(){
+		return "false";
+	}
 }

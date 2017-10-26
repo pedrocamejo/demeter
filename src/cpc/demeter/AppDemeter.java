@@ -466,6 +466,7 @@ public class AppDemeter implements EventListener, IZkAplicacion {
 		cfg.setProperty("hibernate.connection.url",dataSource.getUrl());
 		cfg.setProperty("hibernate.connection.username",dataSource.getUsername());
 	 	cfg.setProperty("hibernate.connection.password",dataSource.getPassword());
+	 	cfg.setProperty("hibernate.show_sql",(String) SpringUtil.getBean("showSql"));
 	 	SessionDao.configurarNuevaSessionFactory(cfg);
 		this.setSede(sede);
 	}

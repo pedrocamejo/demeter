@@ -146,6 +146,11 @@ public class Configuracion {
 	public String respaldo(){
 			return "postgres";
 	}    
+
+	@Bean
+	public String showSql(){
+		return "true";
+	}
 	
 	@Bean(destroyMethod="close")
 	public ComboPooledDataSource datasourceAres() throws PropertyVetoException{

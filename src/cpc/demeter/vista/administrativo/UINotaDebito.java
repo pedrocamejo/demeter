@@ -44,8 +44,7 @@ import cpc.zk.componente.ventanas.CompVentanaMaestroDetalle;
 import cva.pc.componentes.CompEncabezado;
 import cva.pc.demeter.excepciones.ExcFiltroExcepcion;
 
-public class UINotaDebito extends
-		CompVentanaMaestroDetalle<NotaDebito, DetalleDocumentoFiscal> {
+public class UINotaDebito extends CompVentanaMaestroDetalle<NotaDebito, DetalleDocumentoFiscal> {
 
 	private static final long serialVersionUID = 6312240548253365129L;
 	private List<DocumentoFiscal> facuras;
@@ -65,8 +64,6 @@ public class UINotaDebito extends
 	private Textbox observacion, estado;
 	private CompBuscar<DocumentoFiscal> factura;
 	private boolean desactivarnota;
-	
-	//para mostrar grupo de recibos asociados a
 	private CompGrupoDatos GrupoRecibos;
 	private Listbox				 listRecibos;
 	private Button  agregarTodo;
@@ -110,55 +107,35 @@ public class UINotaDebito extends
 		
 		agregarTodo= new Button("Agregar Todo");
 		agregarTodo.setImage((String) SpringUtil.getBean("iconoAdd"));
-		agregarTodo.addEventListener(Events.ON_CLICK, ((ContNotaCredito) getControlador()).agregarTodosItems());
+		agregarTodo.addEventListener(Events.ON_CLICK, ((ContNotaDebito) getControlador()).agregarTodosItems());
 		
 		
 		GrupoRecibos = new CompGrupoDatos("Recibos", 1);
-		
-		
-		/***************         Recibos  ***************/
-			listRecibos = new Listbox();
-			Listhead tituloRecibo = new Listhead();
-			
-			Listheader	numeroRecibo = new Listheader("Numero Recibo ");
-			Listheader	monto = new Listheader(" Monto Aplicado  ");
-						
-			tituloRecibo.appendChild(numeroRecibo);
-			
-			tituloRecibo.appendChild(monto);
-			
-			listRecibos.appendChild(tituloRecibo);
-			listRecibos.setItemRenderer(new ListitemRenderer() {
-			
+		listRecibos = new Listbox();
+		Listhead tituloRecibo = new Listhead();
+		Listheader	numeroRecibo = new Listheader("Numero Recibo ");
+		Listheader	monto = new Listheader(" Monto Aplicado  ");
+		tituloRecibo.appendChild(numeroRecibo);
+		tituloRecibo.appendChild(monto);
+		listRecibos.appendChild(tituloRecibo);
+		listRecibos.setItemRenderer(new ListitemRenderer() {
 			@Override
 			public void render(Listitem arg0, Object arg1) throws Exception {
 				// TODO Auto-generated method stub
 				arg0.setValue(arg1);
 				ReciboDocumentoFiscal reciboDocumento =(ReciboDocumentoFiscal ) arg1;
-				
 				new Listcell(reciboDocumento.getRecibo().getControl()).setParent(arg0);
 				new Listcell(reciboDocumento.getStrMonto()).setParent(arg0);
-				
-				
-					
-				
-				
 				ContNotaDebito controlador = (ContNotaDebito) getControlador();
-				
-				
 				arg0.addEventListener (Events.ON_DOUBLE_CLICK,controlador.getDetalleRecibo() );
-				
 			}
 		});
-		
-		
-		
 		impuesto = new Doublebox[impuestos.size()];
 		Baseimpuesto = new Doublebox[impuestos.size()];
 		porcentajeImpuesto = new Doublebox[impuestos.size()];
+
 		for (int i = 0; i < impuestos.size(); i++) {
-			porcentajeImpuesto[i] = new Doublebox(impuestos.get(i)
-					.getPorcentaje());
+			porcentajeImpuesto[i] = new Doublebox(impuestos.get(i).getPorcentaje());
 			impuesto[i] = new Doublebox();
 			Baseimpuesto[i] = new Doublebox();
 			impuesto[i].setAttribute("dato", impuestos.get(i));
@@ -245,8 +222,7 @@ public class UINotaDebito extends
 			porcentajeImpuesto[i].setWidth("25px");
 			pieDerecho.addComponente(Baseimpuesto[i]);
 			pieDerecho.addComponente("%", porcentajeImpuesto[i]);
-			pieDerecho.addComponente(impuestos.get(i).getDescripcion(),
-					impuesto[i]);
+			pieDerecho.addComponente(impuestos.get(i).getDescripcion(),impuesto[i]);
 		}
 		pieDerecho.addComponente(new Label(""));
 		pieDerecho.addComponente("", new Label(""));
@@ -268,8 +244,7 @@ public class UINotaDebito extends
 			cedula.setValue(getModelo().getBeneficiario().getIdentidadLegal());
 			factura.setSeleccion(getModelo().getFactura());
 			razonSocial.setValue(getModelo().getNombreBeneficiario());
-			direccion.setValue(getModelo().getDireccionBeneficiario()
-					.toString());
+			direccion.setValue(getModelo().getDireccionBeneficiario().toString());
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 		}

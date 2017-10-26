@@ -240,10 +240,10 @@ public class ContProductor extends ContVentanaBase<Productor> {
 			}
 
 			if (vista.getDireccionFiscal().getValue().length() == 0
-					|| vista.getDireccionFiscal().getValue().length() >= 150) {
+					|| vista.getDireccionFiscal().getValue().length() >= 100) {
 				throw new WrongValueException(
 						vista.getDireccionFiscal(),
-						"la direccion fiscal no puede estar en blanco y debe de tener menos de 150 caracteres ");
+						"la direccion fiscal no puede estar en blanco y debe de tener menos de 100 caracteres ");
 			}
 
 			List<Row> filas = vista.getTelefonos().getFilas().getChildren();

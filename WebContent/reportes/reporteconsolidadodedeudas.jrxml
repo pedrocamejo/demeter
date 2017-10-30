@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteconsolidadodedeudas" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="288"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#ADD8E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFEFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0FFF0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFFFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dataset1">
+		<field name="serie" class="java.lang.String">
+			<fieldDescription><![CDATA[[0]]]></fieldDescription>
+		</field>
+		<field name="nroDocumento" class="java.lang.Integer">
+			<fieldDescription><![CDATA[[1]]]></fieldDescription>
+		</field>
+		<field name="nroControl" class="java.lang.Integer">
+			<fieldDescription><![CDATA[[2]]]></fieldDescription>
+		</field>
+		<field name="tipoDocumento" class="java.lang.String">
+			<fieldDescription><![CDATA[[3]]]></fieldDescription>
+		</field>
+		<field name="montoTotal" class="java.lang.Double">
+			<fieldDescription><![CDATA[[4]]]></fieldDescription>
+		</field>
+		<field name="montoSaldo" class="java.lang.Double">
+			<fieldDescription><![CDATA[[5]]]></fieldDescription>
+		</field>
+		<variable name="documentosTotal" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{montoTotal}]]></variableExpression>
+		</variable>
+		<variable name="documentosSaldo" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{montoSaldo}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dataset2">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="strFecha" class="java.lang.String">
+			<fieldDescription><![CDATA[strFecha]]></fieldDescription>
+		</field>
+		<field name="montoSaldo" class="java.lang.Double">
+			<fieldDescription><![CDATA[montoSaldo]]></fieldDescription>
+		</field>
+		<field name="monto" class="java.lang.Double">
+			<fieldDescription><![CDATA[monto]]></fieldDescription>
+		</field>
+		<field name="nroNotaCargo" class="java.lang.Integer">
+			<fieldDescription><![CDATA[nroNotaCargo]]></fieldDescription>
+		</field>
+		<field name="concepto" class="cpc.modelo.demeter.administrativo.ConceptoNotaCargo">
+			<fieldDescription><![CDATA[concepto]]></fieldDescription>
+		</field>
+		<field name="serie" class="java.lang.String">
+			<fieldDescription><![CDATA[serie]]></fieldDescription>
+		</field>
+		<field name="strNroNota" class="java.lang.String">
+			<fieldDescription><![CDATA[strNroNota]]></fieldDescription>
+		</field>
+		<variable name="notasMonto" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+		</variable>
+		<variable name="notasSaldo" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{montoSaldo}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/erivas/Documentos/reportes/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="documentos" class="java.util.List">
+		<fieldDescription><![CDATA[[1]]]></fieldDescription>
+	</field>
+	<field name="notas" class="java.util.List">
+		<fieldDescription><![CDATA[[2]]]></fieldDescription>
+	</field>
+	<field name="cliente" class="cpc.modelo.ministerio.gestion.Cliente">
+		<fieldDescription><![CDATA[[0]]]></fieldDescription>
+	</field>
+	<field name="saldoDocumentos" class="java.lang.Double">
+		<fieldDescription><![CDATA[[3]]]></fieldDescription>
+	</field>
+	<field name="saldoNotas" class="java.lang.Double">
+		<fieldDescription><![CDATA[[4]]]></fieldDescription>
+	</field>
+	<group name="cliente" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{cliente}]]></groupExpression>
+		<groupHeader>
+			<band height="123">
+				<staticText>
+					<reportElement key="staticText-4" x="313" y="50" width="52" height="15"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Tipo:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="365" y="50" width="175" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliente}.getStrTipo()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement key="textField" x="86" y="67" width="452" height="30" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliente}.getDireccion()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="86" y="50" width="100" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliente}.getIdentidadLegal()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" x="86" y="33" width="454" height="15"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliente}.getNombres()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-5" x="10" y="67" width="66" height="15"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Direccion:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-3" x="10" y="50" width="45" height="15"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Cedula:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText-2" x="10" y="35" width="75" height="15"/>
+					<textElement>
+						<font isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Productor :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="97" width="75" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Telefonos]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="86" y="97" width="452" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliente}.getStrTelefonos()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement key="staticText-10" x="10" y="13" width="530" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Estado de Cobro]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="216">
+				<staticText>
+					<reportElement x="41" y="198" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Agricola De Venezuela 0166-0205-14-2051074137 Ingresos por Cosecha]]></text>
+				</staticText>
+				<textField pattern="#,##0.0000" isBlankWhenNull="false">
+					<reportElement key="textField" x="430" y="41" width="114" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{saldoDocumentos}+$F{saldoNotas}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="41" y="181" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Venezuela 0102-0862-91-0000021801 Venta de Maquinaria]]></text>
+				</staticText>
+				<line>
+					<reportElement key="line-2" x="426" y="40" width="118" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="6" y="61" width="534" height="52"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<paragraph lineSpacing="1_1_2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Favor cancelar cada documento individualmente a nombre de: "+"<br> <b>"+" CVA CIA. MECANIZADO AGRICOLA Y TRANSPORTE PEDRO CAMEJO, S.A."+"</b>"+"<br>en alguna de las siguientes cuentas bancarias:"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="41" y="146" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Venezuela 0102-0552-21-0000022075 Servicio de Transporte]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="164" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Venezuela 0102-0552-20-0000025616 Servicio de Maquinaria Pesada/Vialidad Agricola]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="129" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Venezuela 0102-0552-28-0000025603 Servicio de Agente Autorizado/Servicio Tecnico]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField" x="6" y="41" width="403" height="16"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" isItalic="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total de " +$F{cliente}.getNombres()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="41" y="113" width="499" height="14"/>
+					<textElement/>
+					<text><![CDATA[Banco Venezuela 0102-0552-24-0000025412 Servicio Mecanizado]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField" x="6" y="25" width="403" height="16"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" isItalic="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total Saldo Documentos Fiscales"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement key="textField" x="6" y="9" width="403" height="16"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="true" isItalic="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total Saldo Notas De Cargos"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.0000" isBlankWhenNull="false">
+					<reportElement key="textField" x="430" y="10" width="114" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{saldoNotas}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.0000" isBlankWhenNull="false">
+					<reportElement key="textField" x="430" y="25" width="114" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{saldoDocumentos}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="20" width="572" height="22" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{documentos})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[serie]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[nroDocumento]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{nroDocumento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[nroControl]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{nroControl}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[tipoDocumento]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30"/>
+						<jr:detailCell style="table_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{tipoDocumento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[montoTotal]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$V{documentosTotal}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="20">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{montoTotal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[montoSaldo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$V{documentosSaldo}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="20">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{montoSaldo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="10" y="0" width="123" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documentos Fiscales]]></text>
+			</staticText>
+		</band>
+		<band height="47">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="20" width="572" height="25" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset2">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{notas})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[nroNotaCargo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="31" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{strNroNota}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="180">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="180" height="30"/>
+								<textElement/>
+								<text><![CDATA[concepto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="31" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="180" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{concepto}.getDescripcion()]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[Fecha]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="31" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{strFecha}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[monto]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="31" rowSpan="1">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$V{notasMonto}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<text><![CDATA[montoSaldo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="31" rowSpan="1">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$V{notasSaldo}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField pattern="#,##0.0000">
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{montoSaldo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="10" y="0" width="123" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notas de Cargos]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

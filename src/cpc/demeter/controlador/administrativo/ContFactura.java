@@ -242,63 +242,60 @@ public class ContFactura extends ContVentanaMaestroDetalle<DocumentoFiscal, Deta
 	@SuppressWarnings("unchecked")
 	public void validar() throws WrongValuesException, ExcEntradaInconsistente {
 		// TipoFormaPago tipoFormaPago;
-		if (vistaFactura.getTipo().getSelectedItem() == null)
-			throw new WrongValueException(vistaFactura.getTipo(),
-					"Tipo no valido");
+		if (vistaFactura.getTipo().getSelectedItem() == null) {
+			throw new WrongValueException(vistaFactura.getTipo(), "Tipo no valido");
+		}
 		CompBuscar<IProducto> laborDetalle;
 		Doublebox cantidad;
 		Doublebox precio;
 		List<Row> filas = vistaFactura.getDetalle().getFilas().getChildren();
 		int i = 0;
+
 		if (vistaFactura.getTipo().getSeleccion() == "Post-Servicio") {
-			if (vistaFactura.getContrato().getSeleccion() == null)
-				throw new WrongValueException(vistaFactura.getContrato(),
-						"Para este tipo de factura el Contrato debe ser indicado");
+			if (vistaFactura.getContrato().getSeleccion() == null) throw new WrongValueException(vistaFactura.getContrato(), "Para este tipo de factura el Contrato debe ser indicado");
 		}
 		for (Row item : filas) {
 			i++;
 			laborDetalle = (CompBuscar<IProducto>) item.getChildren().get(0);
-			if (laborDetalle.getSeleccion() == null)
-				throw new WrongValueException(laborDetalle,
-						"No indico el servicio a Facturar");
+			if (laborDetalle.getSeleccion() == null){
+				throw new WrongValueException(laborDetalle,	"No indico el servicio a Facturar");
+			}
 			cantidad = (Doublebox) item.getChildren().get(1);
 			precio = (Doublebox) item.getChildren().get(4);
-			if (cantidad.getValue() <= 0)
+			if (cantidad.getValue() <= 0){
 				throw new WrongValueException(cantidad, "Cantidad no valida");
-			if (precio.getValue() <= 0)
+			}
+			if (precio.getValue() <= 0) {
 				throw new WrongValueException(precio, "Monto no valido");
-			if (laborDetalle.getSeleccion() == null)
-				throw new WrongValueException(laborDetalle,
-						"Debe seleccionar servicio");
-		}
-		Integer maximo = getMaximoRenglon();
-		if (vistaFactura.getAplicarInteres().isChecked())
-			maximo--;
-		if (i > maximo)
-			throw new WrongValueException(vistaFactura.getDetalle(),
-					"Factura no puede tener mas de " + maximo + "renglones");
-
-		if (vistaFactura.getSubTotal().getValue() <= 0)
-			throw new WrongValueException(vistaFactura.getSubTotal(),
-					"Monto no valido");
-		try {
-			servicio.getExpedienteAdministrativo(getDato().getBeneficiario());
-		} catch (ExcFiltroExcepcion e) {
-			throw new WrongValueException(vistaFactura.getCedula(),
-					"Productor sin expediente Administrativo");
-		}
-		if (vistaFactura.getCreditoOContado().getSelectedItem()==null){
-			throw new WrongValueException(vistaFactura.getCreditoOContado(),
-					"Debe indicar si es credito o contado");
-		}
-
-		if  (vistaFactura.getCreditoOContado().getSelectedItem().getValue().equals("Contado Electronico")) {
-			Double montofavor = servicio.getSaldoAFavorReciboElectronico(vistaFactura.getCedula().getSeleccion());
-			Double subtotal = vistaFactura.getSubTotal().getValue();
-			if (montofavor<subtotal) {
-				throw new WrongValueException(vistaFactura.getCreditoOContado(),"EL Cliente no tiene Saldo en Recibo con Operaciones Electronicas ");
+			}
+			if (laborDetalle.getSeleccion() == null){
+				throw new WrongValueException(laborDetalle,	"Debe seleccionar servicio");
 			}
 		}
+
+		Integer maximo = getMaximoRenglon();
+		if (vistaFactura.getAplicarInteres().isChecked()) {
+			maximo--;
+		}
+
+		if (i > maximo) {
+			throw new WrongValueException(vistaFactura.getDetalle(),"Factura no puede tener mas de " + maximo + "renglones");
+		}
+
+		if (vistaFactura.getSubTotal().getValue() <= 0){
+			throw new WrongValueException(vistaFactura.getSubTotal(),"Monto no valido");
+		}
+		try {
+			servicio.getExpedienteAdministrativo(getDato().getBeneficiario());
+		}
+		catch (ExcFiltroExcepcion e) {
+			throw new WrongValueException(vistaFactura.getCedula(), "Productor sin expediente Administrativo");
+		}
+		
+		if (vistaFactura.getCreditoOContado().getSelectedItem() == null) {
+			throw new WrongValueException(vistaFactura.getCreditoOContado(), "Debe indicar si es credito o contado");
+		}
+
 	}
 
 	public boolean nroControlValido(DocumentoFiscal documento,

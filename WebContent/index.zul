@@ -109,7 +109,7 @@
 						<div width="100%" align="right" zclass="informador">
 							<vbox>
 								<div align="right">
-  									<label value="Version 2.17" zclass="label"/>
+  									<label value="Version 2.17.1" zclass="label"/>
 								</div>
 								<div align="right">
 									<label id="fechaControl"  zclass="label"/>

@@ -337,53 +337,35 @@ public class ContSolicitudMecanizado extends
 
 	@SuppressWarnings("unchecked")
 	public void onEvent(Event event) throws Exception {
-		System.out.println("hay evento " + event.getName() + " en "
-				+ event.getTarget().getClass().getName());
 		if (event.getTarget() == getVista().getAceptar()) {
-
 			try {
 				procesarCRUD(event);
 			} catch (Exception e) {
 				e.printStackTrace();
 				app.mostrarError(e.getMessage());
 			}
-
-			/*
-			 * }else if (event.getName() == Events.ON_SELECTION &&
-			 * event.getTarget() == vista.getUnidadGestion()){
-			 * actualizarUnidadCobro();
-			 */
-		} else if (event.getName() == Events.ON_SELECTION
+		}
+		else if (event.getName() == Events.ON_SELECTION
 				&& event.getTarget() == vista.getServicio()) {
 			actualizarServicio();
-		} else if (event.getName() == CompBuscar.ON_SELECCIONO && event.getTarget() == vista.getCedula())
-		{
+		}
+		else if (event.getName() == CompBuscar.ON_SELECCIONO && event.getTarget() == vista.getCedula()) {
 			actualizarDatosProdcutor();
 		} 
-		else if (event.getName() == Events.ON_SELECTION
-				&& event.getTarget() == vista.getUnidadProductiva()) {
-			vista.getcodigounidadProductiva().setValue(
-					vista.getUnidadProductiva().getSeleccion().getId()
-							.toString());
-			System.out.println(vista.getUnidadProductiva().getSeleccion()
-					.getId());
-			System.out.println(vista.getcodigounidadProductiva().getValue());
-
-		} else if (event.getName() == CompBuscar.ON_SELECCIONO) {
-			actualizarUnidadesGestion((CompBuscar<IProducto>) event.getTarget());
-		} else if (event.getName() == Events.ON_CLICK
-				&& event.getTarget() == vista.getRechazar()) {
-			// vista.getAprobado().setChecked(false);
-			vista.getEstadoSolictud().setValue(
-					new PerEstadoSolicitud().getrechazada().getEstado());
-			vista.activarAnular();
-		} else if (event.getName() == Events.ON_CLICK
-				&& event.getTarget() == vista.getAprovar()) {
-			// vista.getAprobado().setChecked(true);
-			vista.getEstadoSolictud().setValue(
-					new PerEstadoSolicitud().getaprobada().getEstado());
-
+		else if (event.getName() == Events.ON_SELECTION && event.getTarget() == vista.getUnidadProductiva() && vista.getUnidadProductiva().getSeleccion() != null  ) { 
+			 vista.getcodigounidadProductiva().setValue(vista.getUnidadProductiva().getSeleccion().getId().toString());
 		}
+		else if (event.getName() == CompBuscar.ON_SELECCIONO) {
+			actualizarUnidadesGestion((CompBuscar<IProducto>) event.getTarget());
+		}
+		else if (event.getName() == Events.ON_CLICK && event.getTarget() == vista.getRechazar()) {
+			vista.getEstadoSolictud().setValue(new PerEstadoSolicitud().getrechazada().getEstado());
+			vista.activarAnular();
+		}
+		else if (event.getName() == Events.ON_CLICK && event.getTarget() == vista.getAprovar()) {
+			vista.getEstadoSolictud().setValue( new PerEstadoSolicitud().getaprobada().getEstado());
+		}
+
 	}
 
 	public void actualizarServicio() throws ExcFiltroExcepcion {

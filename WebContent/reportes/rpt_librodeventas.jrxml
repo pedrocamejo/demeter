@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_librodeventas" language="groovy" printOrder="Horizontal" pageWidth="1440" pageHeight="612" orientation="Landscape" columnWidth="1440" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_librodeventas" printOrder="Horizontal" pageWidth="1440" pageHeight="612" orientation="Landscape" columnWidth="1440" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.464100000000004"/>
-	<property name="ireport.x" value="213"/>
+	<property name="ireport.x" value="766"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
 	<property name="net.sf.jasperreports.export.xls.wrap.text" value="false"/>
 	<import value="net.sf.jasperreports.engine.*"/>
-	<import value="net.sf.jasperreports.engine.data.*"/>
 	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="logo" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[new String("/home/erix/Imágenes/logopc.png")]]></defaultValueExpression>
 	</parameter>
@@ -141,6 +141,9 @@
 	<field name="saldoRecibos" class="java.lang.String">
 		<fieldDescription><![CDATA[saldoRecibos]]></fieldDescription>
 	</field>
+	<field name="totalImpuesto9" class="java.lang.Double"/>
+	<field name="totalImpuesto7" class="java.lang.Double"/>
+	<field name="totalImpuesto12" class="java.lang.Double"/>
 	<sortField name="mes" order="Descending"/>
 	<sortField name="nroControl"/>
 	<variable name="total ventas" class="java.lang.Double" calculation="Sum">
@@ -320,7 +323,7 @@
 					<text><![CDATA[% Alicuota]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText" mode="Opaque" x="726" y="18" width="42" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText" mode="Opaque" x="726" y="18" width="63" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -330,10 +333,10 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="6" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Impuesto IVA]]></text>
+					<text><![CDATA[Impuesto IVA 12%]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText" mode="Opaque" x="768" y="18" width="20" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText" mode="Opaque" x="912" y="18" width="46" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -346,7 +349,7 @@
 					<text><![CDATA[IVA Ret enido]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText" mode="Opaque" x="665" y="3" width="210" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText" mode="Opaque" x="665" y="3" width="339" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -385,7 +388,7 @@
 					<textFieldExpression><![CDATA["Operaciones Del Mes "]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement key="staticText" mode="Opaque" x="787" y="18" width="42" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText" mode="Opaque" x="958" y="18" width="42" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -398,7 +401,7 @@
 					<text><![CDATA[Estado]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText-1" mode="Opaque" x="829" y="18" width="46" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText-1" mode="Opaque" x="1004" y="18" width="46" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -411,7 +414,7 @@
 					<text><![CDATA[Tipo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText" mode="Opaque" x="875" y="3" width="347" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText" mode="Opaque" x="1050" y="3" width="347" height="15" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -424,7 +427,7 @@
 					<text><![CDATA[Formas de Pago]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText-1" mode="Opaque" x="875" y="18" width="72" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText-1" mode="Opaque" x="1050" y="18" width="72" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -437,7 +440,7 @@
 					<text><![CDATA[Numeros Reciboss]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText-1" mode="Opaque" x="947" y="18" width="105" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText-1" mode="Opaque" x="1122" y="18" width="105" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -450,7 +453,7 @@
 					<text><![CDATA[Montos Aplicados]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText-1" mode="Opaque" x="1052" y="18" width="74" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText-1" mode="Opaque" x="1227" y="18" width="74" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -463,7 +466,7 @@
 					<text><![CDATA[Monto Recibo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement key="staticText-1" mode="Opaque" x="1126" y="18" width="96" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<reportElement key="staticText-1" mode="Opaque" x="1301" y="18" width="96" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 						<leftPen lineWidth="0.5"/>
@@ -474,6 +477,32 @@
 						<font size="6" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Saldo Recibos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText" mode="Opaque" x="789" y="18" width="63" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Impuesto IVA 9%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement key="staticText" mode="Opaque" x="852" y="18" width="60" height="37" forecolor="#154F15" backcolor="#DCE7E9"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Impuesto IVA 7%]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -566,7 +595,7 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="12" splitType="Stretch">
+		<band height="66" splitType="Stretch">
 			<textField isBlankWhenNull="false">
 				<reportElement key="textField" x="25" y="0" width="60" height="12"/>
 				<textElement>
@@ -624,13 +653,6 @@
 				<textFieldExpression><![CDATA[$F{nroFacturaAfecta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement key="textField" x="726" y="0" width="42" height="12"/>
-				<textElement textAlignment="Right">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{totalImpuesto}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="false">
 				<reportElement key="textField" x="594" y="0" width="71" height="12"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
@@ -659,38 +681,53 @@
 				<textFieldExpression><![CDATA[$F{tipodocu}]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00" isBlankWhenNull="false">
-				<reportElement key="textField" x="787" y="0" width="42" height="12"/>
+				<reportElement key="textField" x="958" y="0" width="42" height="12"/>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{anulado} ? "Anulada":"Activa"]]></textFieldExpression>
 			</textField>
 			<textField pattern="##0.00" isBlankWhenNull="false">
-				<reportElement key="textField-1" x="829" y="0" width="46" height="12"/>
+				<reportElement key="textField-1" x="1004" y="0" width="46" height="12"/>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{postServicio} ? "PostServicio":"PreServicio"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="875" y="0" width="72" height="12"/>
+				<reportElement x="1050" y="0" width="72" height="12"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{numerosREcibos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="947" y="0" width="105" height="12"/>
+				<reportElement x="1122" y="0" width="105" height="12"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{montosAplicados}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1052" y="0" width="74" height="12"/>
+				<reportElement x="1227" y="0" width="74" height="12"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{montoRecibos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1126" y="0" width="96" height="12"/>
+				<reportElement x="1301" y="0" width="96" height="12"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{saldoRecibos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="726" y="0" width="63" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{totalImpuesto12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="789" y="0" width="63" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{totalImpuesto9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="852" y="0" width="60" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{totalImpuesto7}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
